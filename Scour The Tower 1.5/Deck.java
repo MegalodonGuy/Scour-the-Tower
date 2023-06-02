@@ -47,14 +47,18 @@ public class Deck extends Actor
     public void discardHand(){ 
         for (int i=0; i<hand.size(); i++){
          discardPile.add(hand.get(i));
-         getWorld().removeObject((Card)hand.get(i)); // clears card off world so it can be reused
+         Card card = (Card)hand.get(i);
+         getWorld().removeObject(card); // clears card off world so it can be reused
+         card.deselect();
         }
         hand.clear(); 
     }
     public void discardCard(Object card){
+        Card usedCard = (Card)card; 
         discardPile.add(card); 
-        getWorld().removeObject((Card)card);
+        getWorld().removeObject(usedCard);// clears card off world so it can be reused
         hand.remove(card); 
+        usedCard.deselect();  
     }
     
     public ArrayList<Object> getHand(){

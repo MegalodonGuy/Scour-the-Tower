@@ -21,7 +21,7 @@ public class Entity extends Actor
             // if card used on character
             if (Deck.getSelectedCard()!=null){
              Card card = (Card)Deck.getSelectedCard(); 
-             health-=card.getDamage();
+             damage(card.getDamage());
              deck.discardCard(card); 
             }
         }
@@ -30,15 +30,15 @@ public class Entity extends Actor
     public void damage(int damage){
         health-=damage;
         if (health<=0){
-            //TODO die
+            getWorld().removeObject(this); 
         }
     }
-    public void heal (int health){
+    public void heal (int health){ 
         damage(-health);
     }
     public void reduceMaxHealth(int reduction){
         maxHealth-=reduction;
-        if (health>maxHealth){
+        if (health>maxHealth){ 
             health=maxHealth;
         }
     }

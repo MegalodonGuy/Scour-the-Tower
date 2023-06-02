@@ -95,4 +95,7 @@ public class Card extends Actor
     public int getWeaken(){
         return weaken; 
     }
+    public void deselect(){
+        selected=false;
+    }
 }
