@@ -17,10 +17,10 @@ public class Card extends Actor
     private int vulnerable = 0;
     private int weaken = 0;
     
-    private boolean upgraded = false; 
+    private boolean upgraded = false;
+    private boolean selected = false;
     public Card(int CardID){
         this.CardID = CardID;
-        
         switch (CardID){
             case 1: 
             setImage("1.png"); 
@@ -43,7 +43,16 @@ public class Card extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        if (Greenfoot.mouseClicked(this)){
+             if (!selected){
+             Deck.setSelected(this);
+             selected=true;
+            }
+            else{
+             Deck.setSelected(null);  
+             selected=false;
+            }
+            }
     }
     private void setStats(int damage, int block,int energy){
         this.damage = damage; 
@@ -67,6 +76,9 @@ public class Card extends Actor
             break;
         }
         upgraded=true; 
+    }
+    private void selectCard(){
+        
     }
     public int getCardID(){
         return CardID; 

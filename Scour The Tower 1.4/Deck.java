@@ -9,11 +9,13 @@ import java.util.Collections;
  */
 public class Deck extends Actor
 {
-    private ArrayList<Object> deck = new ArrayList<Object>(); 
-    private ArrayList<Object> hand = new ArrayList<Object>();
-    private ArrayList<Object> drawPile = new ArrayList<Object>();
-    private ArrayList<Object> discardPile = new ArrayList<Object>();
-    private ArrayList<Object> exhaustPile = new ArrayList<Object>();
+    private ArrayList<Object> deck = new ArrayList<Object>(); //full deck
+    private ArrayList<Object> hand = new ArrayList<Object>(); // current hand
+    private ArrayList<Object> drawPile = new ArrayList<Object>(); // draw from here
+    private ArrayList<Object> discardPile = new ArrayList<Object>(); // cards go here after used or turn ended
+    private ArrayList<Object> exhaustPile = new ArrayList<Object>();// exhaust cards go here so they cannot reappear during the current fight after played
+    private static Object selectedCard; // card selected to be used, one at a time
+    
       public Deck(ArrayList<Object> deck){
         this.deck=Util.cloneContents(deck); 
         drawPile=Util.cloneContents(deck); 
@@ -52,5 +54,9 @@ public class Deck extends Actor
     
     public ArrayList<Object> getHand(){
         return hand;
+    }
+    
+    public static void setSelected(Object card){
+        selectedCard=card; 
     }
 }

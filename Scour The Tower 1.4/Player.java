@@ -20,6 +20,7 @@ public class Player extends Entity
     {
         // Add your action code here.
     }
+    @Override
     public void damage(int damage){
         health-=damage;
         if (health<=0){

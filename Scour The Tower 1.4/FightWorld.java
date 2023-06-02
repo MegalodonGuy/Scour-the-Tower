@@ -19,26 +19,24 @@ public class FightWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1); 
+        initialDeck.add(new Card(1)); 
+        initialDeck.add(new Card(1)); 
+        initialDeck.add(new Card(1)); 
+        initialDeck.add(new Card(1)); 
+        initialDeck.add(new Card(1)); 
+        initialDeck.add(new Card(2)); 
+        initialDeck.add(new Card(2)); 
+        initialDeck.add(new Card(2)); 
+        initialDeck.add(new Card(2)); 
+        initialDeck.add(new Card(3));
         
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(3)); 
-        
-        
-        deck = new Deck(initialDeck); 
+        deck = new Deck(initialDeck);  
         addObject(deck,0,0);
         addObject(new EndTurnButton(deck),900,700);
         addObject(new Player(80,80), 200,400);
         addObject(new JawWorm(42,42), 800,300);
     }
-    
+ 
     public void act(){
       updateCardVisuals(); 
     }
