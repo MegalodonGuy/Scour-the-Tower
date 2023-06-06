@@ -12,6 +12,9 @@ public class Entity extends Actor
     protected int health; 
     protected Deck deck; 
     private int block; 
+    
+    private int vulnerable=0; 
+    private int weakened=0; 
     public Entity(int maxHealth, int health,Deck deck){
      this.maxHealth=maxHealth;
      this.health=health;
@@ -27,21 +30,22 @@ public class Entity extends Actor
             // if card used on character
             if (Deck.getSelectedCard()!=null){
              Card card = (Card)Deck.getSelectedCard(); 
-             damage(card.getDamage());
-             
+             hit(card.getDamage(),card.getVulnerable(),card.getWeaken()); 
              deck.discardCard(card); 
             }
-        }
+        } 
     }
     
-    public void damage(int damage){
+    public void hit(int damage,int vulnerable, int weaken){
         health-=damage;
+        this.vulnerable+=vulnerable; 
+        this.weakened+=weaken;
         if (health<=0){
             getWorld().removeObject(this); 
         }
     }
     public void heal (int health){ 
-        damage(-health);
+        this.health+=health;
     }
     public void reduceMaxHealth(int reduction){
         maxHealth-=reduction;
@@ -54,5 +58,15 @@ public class Entity extends Actor
     }
     public void block (int block){
         this.block+=block; 
+    }
+    public void vulnerable(int vulnerable){
+        this.vulnerable+=vulnerable; 
+    }
+    public void weaken(int weaken){
+        this.weakened+=weaken; 
+    }
+    public void turnPassed(){
+        vulnerable--; 
+        weakened--; 
     }
 }

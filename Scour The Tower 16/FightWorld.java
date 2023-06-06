@@ -12,6 +12,8 @@ public class FightWorld extends World
     private ArrayList<Object> hand = new ArrayList<Object>(); 
     private Deck deck;
     private Player player; 
+    private Enemy enemy1;
+    private EndTurnButton etb;  
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -33,32 +35,29 @@ public class FightWorld extends World
         
         deck = new Deck(initialDeck); 
         player = new Player(80,80,deck); 
+        enemy1=new JawWorm(42,42,deck); 
+        etb = new EndTurnButton(deck); 
+        
         addObject(deck,0,0);
-        addObject(new EndTurnButton(deck),900,700);
+        addObject(etb,900,700);
         addObject(player, 200,400);
-        addObject(new JawWorm(42,42,deck), 800,300);
+        addObject(enemy1, 800,300);
     }
  
     public void act(){
-      updateCardVisuals();
-      if (Greenfoot.mouseClicked(this)){
-            // if card used on character
-            if (Deck.getSelectedCard()!=null){
+      Util.updateCardVisuals(hand, deck, this);
+      if (etb.getTurnPassed()){
+          enemy1.turnPassed();
+          etb.setTurnPassed(false);
+      }
+      if (Greenfoot.mouseClicked(this) && Deck.getSelectedCard()!=null){
+            // if card used on enemy
              Card card = (Card)Deck.getSelectedCard(); 
              if (!card.getTarget()){
                 player.block(card.getBlock()); 
+                enemy1.hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
                 deck.discardCard(card);
               }
-            }
         }
     }
-    
-    public void updateCardVisuals(){
-        this.hand = Util.cloneContents(deck.getHand());
-        for (int i=0; i<hand.size(); i++){ 
-            Card card =(Card)hand.get(i);
-            addObject(card,250+120*i,750); 
-        }
-    }
-    
 }

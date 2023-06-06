@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import greenfoot.World;
 
 /**
  * Write a description of class Util here.
@@ -15,8 +16,14 @@ public class Util
     {
         
     }
-
     
+    public static void updateCardVisuals(ArrayList<Object> hand, Deck deck, World world){
+        hand = Util.cloneContents(deck.getHand());
+        for (int i=0; i<hand.size(); i++){ 
+            Card card =(Card)hand.get(i);
+            world.addObject(card,250+120*i,750); 
+        }
+    }
     public static ArrayList<Object> cloneContents(ArrayList<Object> cloner){
         ArrayList<Object> tempList= new ArrayList<Object>(); 
         for (int i=0; i<cloner.size(); i++){

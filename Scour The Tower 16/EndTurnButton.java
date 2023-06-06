@@ -10,11 +10,21 @@ import java.util.ArrayList;
 public class EndTurnButton extends Button
 {
     private Deck deck;
+    private boolean turnPassed; 
     public EndTurnButton(Deck deck){
-     this.deck=deck;           
+     this.deck=deck;  
+     turnPassed=false; 
     }
     @Override 
-    protected void buttonAction(){
+    protected void buttonAction(){  
         deck.deal(); 
+        turnPassed=true; 
+    }
+    
+    public boolean getTurnPassed(){
+        return turnPassed; 
+    }
+    public void setTurnPassed(boolean turnPassed){
+        this.turnPassed=turnPassed; 
     }
 }

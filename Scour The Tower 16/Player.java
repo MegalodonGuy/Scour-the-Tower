@@ -20,10 +20,10 @@ public class Player extends Entity
         // Add your action code here.
     }
     @Override
-    public void damage(int damage){
-        health-=damage;
+    public void hit(int damage,int vulnerable, int weaken){
+        super.hit(damage, vulnerable, weaken); 
         if (health<=0){
-            //TODO death world
+            //lose world 
         }
     }
     

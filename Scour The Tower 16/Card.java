@@ -19,7 +19,8 @@ public class Card extends Actor
     
     private boolean upgraded = false;
     private boolean selected = false;
-    private boolean target; 
+    private boolean target; // is it a non target or target card?
+    private boolean aoe; // does it effect every enemy?
     public Card(int CardID){
         this.CardID = CardID;
         switch (CardID){
@@ -34,7 +35,7 @@ public class Card extends Actor
             case 3:
             setImage("3.png");
             setStats(8,0,2,true);
-            vulnerable=2; 
+            vulnerable=2;  
             break;
         }
     } 
