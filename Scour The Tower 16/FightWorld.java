@@ -8,11 +8,11 @@ import java.util.ArrayList;
  */
 public class FightWorld extends World
 {
-    private ArrayList<Object> initialDeck = new ArrayList<Object>(); 
-    private ArrayList<Object> hand = new ArrayList<Object>(); 
+    private ArrayList <Object> initialDeck = new ArrayList<Object>(); 
+    private ArrayList <Object> hand = new ArrayList<Object>(); 
+    private ArrayList <Object> enemies = new ArrayList<Object>();  
     private Deck deck;
-    private Player player; 
-    private Enemy enemy1;
+    private Player player;
     private EndTurnButton etb;  
     /**
      * Constructor for objects of class MyWorld.
@@ -34,20 +34,20 @@ public class FightWorld extends World
         initialDeck.add(new Card(3));
         
         deck = new Deck(initialDeck); 
-        player = new Player(80,80,deck); 
-        enemy1=new JawWorm(42,42,deck); 
+        enemies.add(new JawWorm(42,42,deck)); 
+        player = new Player(80,80,deck);  
         etb = new EndTurnButton(deck); 
         
         addObject(deck,0,0);
         addObject(etb,900,700);
         addObject(player, 200,400);
-        addObject(enemy1, 800,300);
+        addObject((Entity)enemies.get(0), 800,300);
     }
  
     public void act(){
       Util.updateCardVisuals(hand, deck, this);
       if (etb.getTurnPassed()){
-          enemy1.turnPassed();
+          ((Entity)enemies.get(0)).turnPassed();
           etb.setTurnPassed(false);
       }
       if (Greenfoot.mouseClicked(this) && Deck.getSelectedCard()!=null){
@@ -55,7 +55,7 @@ public class FightWorld extends World
              Card card = (Card)Deck.getSelectedCard(); 
              if (!card.getTarget()){
                 player.block(card.getBlock()); 
-                enemy1.hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
+                ((Entity)enemies.get(0)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
                 deck.discardCard(card);
               }
         }
