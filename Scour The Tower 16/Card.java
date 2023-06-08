@@ -19,23 +19,33 @@ public class Card extends Actor
     
     private boolean upgraded = false;
     private boolean selected = false;
-    private boolean target; // is it a non target or target card?
-    private boolean aoe; // does it effect every enemy?
+    private boolean target; // is it a non target or target card? - assumes random target for attacking
+    private boolean aoe; // does it effect every enemy? (or every enemy + yourself)
     public Card(int CardID){
         this.CardID = CardID;
         switch (CardID){
             case 1: 
             setImage("1.png"); 
-            setStats(6,0,1,true); //attack damage, block amount and energy cost target or non target
+            setStats(6,0,1); //attack damage, block amount and energy cost
+            target=true; 
             break;
             case 2:
             setImage("2.png");
-            setStats(0,5,1,false);
+            setStats(0,5,1);
+            target=false;
             break;
             case 3:
             setImage("3.png");
-            setStats(8,0,2,true);
+            setStats(8,0,2);
             vulnerable=2;  
+            target=true;
+            break;
+            case 4:
+            setImage("4.png");
+            setStats(6,0,1);
+            target=true;  
+            aoe=true; 
+            target=false;
             break;
         }
     } 
@@ -56,11 +66,10 @@ public class Card extends Actor
             }
             }
     }
-    private void setStats(int damage, int block,int energy, boolean target){
+    private void setStats(int damage, int block,int energy){
         this.damage = damage; 
         this.block = block; 
         this.energy = energy; 
-        this.target = target; 
     }
     public void upgrade(){
         if (upgraded){
@@ -103,5 +112,8 @@ public class Card extends Actor
     }
     public boolean getTarget(){
         return target; 
+    }
+    public boolean getAOE(){
+        return aoe; 
     }
 }

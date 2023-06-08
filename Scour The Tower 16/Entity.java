@@ -12,13 +12,16 @@ public class Entity extends Actor
     protected int health; 
     protected Deck deck; 
     private int block; 
-    
+    private boolean dead; 
     private int vulnerable=0; 
     private int weakened=0; 
-    public Entity(int maxHealth, int health,Deck deck){
+    private FightWorld world;
+    public Entity(int maxHealth, int health,Deck deck, FightWorld world){
      this.maxHealth=maxHealth;
      this.health=health;
      this.deck=deck;
+     dead=false;
+     this.world =world; 
     }
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
@@ -29,9 +32,14 @@ public class Entity extends Actor
         if (Greenfoot.mouseClicked(this)){
             // if card used on character
             if (Deck.getSelectedCard()!=null){
-             Card card = (Card)Deck.getSelectedCard(); 
+             Card card = (Card)Deck.getSelectedCard();
+             if (card.getTarget()){
              hit(card.getDamage(),card.getVulnerable(),card.getWeaken()); 
-             deck.discardCard(card); 
+             deck.discardCard(card);
+            }
+            else{
+                world.cardUsedOnWorld(); 
+            }
             }
         } 
     }
@@ -40,8 +48,9 @@ public class Entity extends Actor
         health-=damage;
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
-        if (health<=0){
+        if (health<=0 && !dead){
             getWorld().removeObject(this); 
+            dead=true; 
         }
     }
     public void heal (int health){ 

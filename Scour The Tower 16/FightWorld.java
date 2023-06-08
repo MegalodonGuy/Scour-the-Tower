@@ -32,16 +32,20 @@ public class FightWorld extends World
         initialDeck.add(new Card(2)); 
         initialDeck.add(new Card(2)); 
         initialDeck.add(new Card(3));
+        initialDeck.add(new Card(4));
         
         deck = new Deck(initialDeck); 
-        enemies.add(new JawWorm(42,42,deck)); 
-        player = new Player(80,80,deck);  
+        enemies.add(new JawWorm(42,42,deck,this));
+        enemies.add(new JawWorm(42,42,deck,this));
+        player = new Player(80,80,deck,this);  
         etb = new EndTurnButton(deck); 
         
         addObject(deck,0,0);
         addObject(etb,900,700);
         addObject(player, 200,400);
-        addObject((Entity)enemies.get(0), 800,300);
+            for (int x =0; x<enemies.size(); x++){
+        addObject((Entity)enemies.get(x), 800-100*x,300);
+        }
     }
  
     public void act(){
@@ -52,12 +56,24 @@ public class FightWorld extends World
       }
       if (Greenfoot.mouseClicked(this) && Deck.getSelectedCard()!=null){
             // if card used on enemy
-             Card card = (Card)Deck.getSelectedCard(); 
-             if (!card.getTarget()){
+             cardUsedOnWorld(); 
+        }
+    }
+    
+    public void cardUsedOnWorld(){
+        Card card = (Card)Deck.getSelectedCard(); 
+        if (!card.getTarget() &&!card.getAOE()){
                 player.block(card.getBlock()); 
-                ((Entity)enemies.get(0)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
+                int ran = (int)Math.random()*enemies.size(); 
+                ((Entity)enemies.get(ran)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
                 deck.discardCard(card);
-              }
+        }
+        else if (card.getAOE()){
+                  player.block(card.getBlock()); 
+                    for (int x=0; x< enemies.size(); x++){ 
+                ((Entity)enemies.get(x)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
+                }
+                deck.discardCard(card);
         }
     }
 }

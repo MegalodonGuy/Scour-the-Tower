@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Entity
 {
-    public Player(int maxHealth, int health,Deck deck){
-     super(maxHealth, health, deck);
+    public Player(int maxHealth, int health,Deck deck, FightWorld world){
+     super(maxHealth, health, deck, world);
     }
     /**
      * Act - do whatever the Player wants to do. This method is called whenever

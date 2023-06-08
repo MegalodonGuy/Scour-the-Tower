@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class JawWorm extends Enemy
 {
-    public JawWorm(int health, int maxHealth,Deck deck){
-        super(maxHealth, health, deck);
+    public JawWorm(int health, int maxHealth,Deck deck, FightWorld world){
+        super(maxHealth, health, deck, world);
     } 
 }

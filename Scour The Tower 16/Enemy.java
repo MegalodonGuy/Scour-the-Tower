@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Enemy extends Entity
 {
-    public Enemy(int maxHealth, int health,Deck deck){
-     super(maxHealth, health, deck);
+    public Enemy(int maxHealth, int health,Deck deck, FightWorld world){
+     super(maxHealth, health, deck, world);
     }
 }
