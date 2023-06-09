@@ -1,5 +1,6 @@
 #Greenfoot project file
 class.EndTurnButton.image=End.png
+class.FightWorld.image=Null.png
 class.JawWorm.image=JawWorm.png
 class.Player.image=Player.png
 dependency1.from=FightWorld

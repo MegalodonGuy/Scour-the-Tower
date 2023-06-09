@@ -62,16 +62,26 @@ public class FightWorld extends World
     
     public void cardUsedOnWorld(){
         Card card = (Card)Deck.getSelectedCard(); 
+        
+        
         if (!card.getTarget() &&!card.getAOE()){
                 player.block(card.getBlock()); 
                 int ran = (int)Math.random()*enemies.size(); 
-                ((Entity)enemies.get(ran)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
+                int dmg = card.getDamage();
+                if (((Entity)enemies.get(ran)).getVulnerable()>0){
+                 dmg*=1.50;
+                }
+                ((Entity)enemies.get(ran)).hit(dmg,card.getVulnerable(),card.getWeaken());
                 deck.discardCard(card);
         }
         else if (card.getAOE()){
                   player.block(card.getBlock()); 
-                    for (int x=0; x< enemies.size(); x++){ 
-                ((Entity)enemies.get(x)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
+                    for (int x=0; x< enemies.size(); x++){
+                        int dmg = card.getDamage();
+                        if (((Entity)enemies.get(x)).getVulnerable()>0){
+                 dmg*=1.50;
+                }
+                ((Entity)enemies.get(x)).hit(dmg,card.getVulnerable(),card.getWeaken());
                 }
                 deck.discardCard(card);
         }

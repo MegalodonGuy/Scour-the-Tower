@@ -42,7 +42,7 @@ public class Card extends Actor
             break;
             case 4:
             setImage("4.png");
-            setStats(6,0,1);
+            setStats(8,0,1);
             target=true;  
             aoe=true; 
             target=false;
