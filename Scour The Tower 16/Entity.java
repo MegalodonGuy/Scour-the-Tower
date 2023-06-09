@@ -34,9 +34,12 @@ public class Entity extends Actor
             // if card used on character
             if (Deck.getSelectedCard()!=null){
              Card card = (Card)Deck.getSelectedCard();
+             if (card.getEnergy()>deck.getAvailableEnergy()){
+                 return; 
+             }
              if (card.getTarget()){
              hit(card.getDamage(),card.getVulnerable(),card.getWeaken()); 
-             deck.discardCard(card);
+             deck.playedCard(card);
             }
             else{
                 world.cardUsedOnWorld(); 

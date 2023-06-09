@@ -1,6 +1,6 @@
 #Greenfoot project file
 class.EndTurnButton.image=End.png
-class.FightWorld.image=Null.png
+class.FightWorld.image=brick.jpg
 class.JawWorm.image=JawWorm.png
 class.Player.image=Player.png
 dependency1.from=FightWorld
@@ -69,10 +69,10 @@ dependency8.type=UsesDependency
 dependency9.from=Entity
 dependency9.to=FightWorld
 dependency9.type=UsesDependency
-editor.fx.0.height=739
-editor.fx.0.width=816
-editor.fx.0.x=232
-editor.fx.0.y=82
+editor.fx.0.height=615
+editor.fx.0.width=793
+editor.fx.0.x=906
+editor.fx.0.y=186
 height=1056
 package.numDependencies=22
 package.numTargets=10
