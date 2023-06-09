@@ -35,11 +35,7 @@ public class Entity extends Actor
             if (Deck.getSelectedCard()!=null){
              Card card = (Card)Deck.getSelectedCard();
              if (card.getTarget()){
-             int dmg = card.getDamage();
-             if (vulnerable>0){
-                 dmg*=1.50;
-             }
-             hit(dmg,card.getVulnerable(),card.getWeaken()); 
+             hit(card.getDamage(),card.getVulnerable(),card.getWeaken()); 
              deck.discardCard(card);
             }
             else{
@@ -51,7 +47,11 @@ public class Entity extends Actor
     }
     
     public void hit(int damage,int vulnerable, int weaken){
-        health-=damage;
+        double dmgMod=1; 
+        if (this.vulnerable>0){
+        dmgMod*=1.5; 
+        }
+        health-=(damage*=dmgMod);
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
         if (health<=0 && !dead){
@@ -81,10 +81,11 @@ public class Entity extends Actor
         this.weakened+=weaken; 
     }
     public void turnPassed(){
+        if (vulnerable>0){
         vulnerable--; 
+    }
+    if (weakened>0){
         weakened--; 
     }
-    public int getVulnerable(){
-        return vulnerable; 
     }
 }
