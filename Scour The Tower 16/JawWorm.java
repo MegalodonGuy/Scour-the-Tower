@@ -40,13 +40,14 @@ public class JawWorm extends Enemy
         
     }
     protected void move1(){ //chomp
-         player.hit(11,0,0);
+         player.hit(11+strength,0,0);
     }
     protected void move2(){//thrash
-      player.hit(7,0,0);
+      player.hit(7+strength,0,0);
       block(5); 
     }
     protected void move3(){ // bellow
-         
+      increaseStrength(3);  
+      block(5);
     }
 }

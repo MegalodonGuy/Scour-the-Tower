@@ -21,6 +21,7 @@ public class Card extends Actor
     private boolean selected = false;
     private boolean target; // is it a non target or target card? - assumes random target for attacking
     private boolean aoe; // does it effect every enemy? (or every enemy + yourself)
+     
     public Card(int CardID){
         this.CardID = CardID;
         switch (CardID){

@@ -22,6 +22,9 @@ public class FightWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1); 
+        
+        
+
         initialDeck.add(new Card(1)); 
         initialDeck.add(new Card(1)); 
         initialDeck.add(new Card(1)); 
@@ -36,6 +39,7 @@ public class FightWorld extends World
         
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
+        
         
         enemies.add(new JawWorm(42,42,deck,this,player));
         enemies.add(new JawWorm(42,42,deck,this,player));
@@ -73,15 +77,19 @@ public class FightWorld extends World
         if (!card.getTarget() &&!card.getAOE()){
                 player.block(card.getBlock()); 
                 int ran = (int)Math.random()*enemies.size(); 
-                ((Entity)enemies.get(ran)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
+                ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken());
                 deck.playedCard(card);
         }
         else if (card.getAOE()){
                   player.block(card.getBlock()); 
                     for (int x=0; x< enemies.size(); x++){
-                ((Entity)enemies.get(x)).hit(card.getDamage(),card.getVulnerable(),card.getWeaken());
+                ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken());
                 }
                 deck.playedCard(card);
         }
+    }
+    
+    public Player getPlayer(){
+        return player; 
     }
 }

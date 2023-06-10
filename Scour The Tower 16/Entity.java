@@ -15,6 +15,9 @@ public class Entity extends Actor
     protected boolean dead; 
     protected int vulnerable=0; 
     protected int weakened=0; 
+    protected int strength=0; // added dmg on to every attack
+    protected int dex=0; // added block on every block 
+    
     private FightWorld world;
     
     public Entity(int maxHealth, int health,Deck deck, FightWorld world){
@@ -38,7 +41,7 @@ public class Entity extends Actor
                  return; 
              }
              if (card.getTarget()){
-             hit(card.getDamage(),card.getVulnerable(),card.getWeaken()); 
+             hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken()); 
              deck.playedCard(card);
             }
             else{
@@ -73,6 +76,9 @@ public class Entity extends Actor
     }
     public void heal (int health){ 
         this.health+=health;
+        if (health>maxHealth){ 
+            health=maxHealth;
+        }
     }
     public void reduceMaxHealth(int reduction){
         maxHealth-=reduction;
@@ -84,7 +90,7 @@ public class Entity extends Actor
         reduceMaxHealth(-promotion); 
     }
     public void block (int block){
-        this.block+=block; 
+        this.block+=(block+dex); 
     }
     public void vulnerable(int vulnerable){
         this.vulnerable+=vulnerable; 
@@ -92,6 +98,13 @@ public class Entity extends Actor
     public void weaken(int weaken){
         this.weakened+=weaken; 
     }
+    public void increaseStrength(int strength){
+        this.strength+=strength;
+    }
+    public void increaseDex(int dex){
+        this.dex+=dex;
+    }
+    
     public void turnPassed(){
       this.block=0;
          if (vulnerable>0){
