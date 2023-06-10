@@ -18,6 +18,9 @@ public class JawWorm extends Enemy
     
     @Override
     protected void attackPattern(){
+        if (dead){
+            return; 
+        }
         if (firstMove){
             move1(); 
             firstMove=false; 

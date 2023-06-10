@@ -12,7 +12,7 @@ public class Entity extends Actor
     protected int health; 
     protected Deck deck; 
     protected int block; 
-    private boolean dead; 
+    protected boolean dead; 
     protected int vulnerable=0; 
     protected int weakened=0; 
     private FightWorld world;
