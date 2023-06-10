@@ -20,9 +20,11 @@ public class JawWorm extends Enemy
     protected void attackPattern(){
         if (firstMove){
             move1(); 
+            firstMove=false; 
             return; 
         }
-        int ran= ((int)Math.random()*100)+1; 
+        
+        int ran= ((int)(Math.random()*100))+1; 
         if (ran>=1 && ran<=25){
             move1(); 
         }
