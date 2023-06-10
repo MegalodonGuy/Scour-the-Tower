@@ -10,10 +10,15 @@ public class JawWorm extends Enemy
 {
     private boolean firstMove;
     private FightWorld world;
+    GreenfootImage image;
+    
     public JawWorm(int health, int maxHealth,Deck deck, FightWorld world, Player player){
         super(maxHealth, health, deck, world,player);
         firstMove=true;
         this.world=world;
+        image = new GreenfootImage("JawWorm.png");
+        image.scale(300,300);
+        setImage(image);
     } 
     
     @Override

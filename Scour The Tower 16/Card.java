@@ -21,34 +21,37 @@ public class Card extends Actor
     private boolean selected = false;
     private boolean target; // is it a non target or target card? - assumes random target for attacking
     private boolean aoe; // does it effect every enemy? (or every enemy + yourself)
-     
+    
+    GreenfootImage image; 
     public Card(int CardID){
         this.CardID = CardID;
         switch (CardID){
             case 1: 
-            setImage("1.png"); 
+            image = new GreenfootImage("Strike.png"); 
             setStats(6,0,1); //attack damage, block amount and energy cost
             target=true; 
             break;
             case 2:
-            setImage("2.png");
+            image = new GreenfootImage("Defend.png");
             setStats(0,5,1);
             target=false;
             break;
             case 3:
-            setImage("3.png");
+            image = new GreenfootImage("Bash.png");
             setStats(8,0,2);
             vulnerable=2;  
             target=true;
             break;
             case 4:
-            setImage("4.png");
+            image = new GreenfootImage("Cleave.png");
             setStats(8,0,1);
             target=true;  
             aoe=true; 
             target=false;
             break;
         }
+        image.scale(150,194);
+        setImage(image);
     } 
     /**
      * Act - do whatever the Cards wants to do. This method is called whenever

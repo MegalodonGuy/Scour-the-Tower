@@ -1,4 +1,5 @@
 #Greenfoot project file
+class.Card.image=Cleave.png
 class.EndTurnButton.image=End.png
 class.FightWorld.image=brick.jpg
 class.JawWorm.image=JawWorm.png

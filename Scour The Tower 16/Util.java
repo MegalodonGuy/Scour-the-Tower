@@ -22,7 +22,7 @@ public class Util
         hand = Util.cloneContents(deck.getHand());
         for (int i=0; i<hand.size(); i++){
             Card card =(Card)hand.get(i);
-            world.addObject(card,250+120*i,750); 
+            world.addObject(card,200+140*i,700); 
             
             world.showText(""+deck.getAvailableEnergy()+"/"+deck.getMaxEnergy(),100,700);
         }
