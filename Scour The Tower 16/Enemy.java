@@ -17,4 +17,10 @@ public class Enemy extends Entity
     protected void attackPattern(){
         System.out.println("hey");
     }
+    @Override
+    public void turnPassed(){
+      super.turnPassed();
+       ((Enemy)this).attackPattern(); 
+      
+    }
 }

@@ -26,5 +26,4 @@ public class Player extends Entity
             //lose world 
         }
     }
-    
 }

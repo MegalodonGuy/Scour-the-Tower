@@ -56,6 +56,7 @@ public class FightWorld extends World
           for (int x=0; x< enemies.size(); x++){
                ((Entity)enemies.get(x)).turnPassed();
                 }
+          ((Entity)player).turnPassed();
           etb.setTurnPassed(false);
       }
       if (Greenfoot.mouseClicked(this) && Deck.getSelectedCard()!=null){

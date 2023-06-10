@@ -13,8 +13,8 @@ public class Entity extends Actor
     protected Deck deck; 
     protected int block; 
     private boolean dead; 
-    private int vulnerable=0; 
-    private int weakened=0; 
+    protected int vulnerable=0; 
+    protected int weakened=0; 
     private FightWorld world;
     
     public Entity(int maxHealth, int health,Deck deck, FightWorld world){
@@ -54,7 +54,16 @@ public class Entity extends Actor
         if (this.vulnerable>0){
         dmgMod*=1.5; 
         }
-        health-=(damage*=dmgMod);
+        int dmg=0;
+        int tempBlock = (block-(damage*=dmgMod)); // take away health = to the damage with modifiers but remove the damage that can get blocked
+        if (tempBlock<=0){ // if attack broke through block
+            dmg=(-1*tempBlock);
+            block=0; 
+        }
+        else{
+            block=tempBlock;
+        }
+        health-=dmg; 
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
         if (health<=0 && !dead){
@@ -84,14 +93,12 @@ public class Entity extends Actor
         this.weakened+=weaken; 
     }
     public void turnPassed(){
+      this.block=0;
          if (vulnerable>0){
         vulnerable--; 
       }
       if (weakened>0){
         weakened--; 
-      }
-      if (this==(Enemy)this){
-          ((Enemy)this).attackPattern(); 
-      }
+      } 
     }
 }
