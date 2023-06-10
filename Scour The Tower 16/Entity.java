@@ -11,7 +11,7 @@ public class Entity extends Actor
     protected int maxHealth; 
     protected int health; 
     protected Deck deck; 
-    private int block; 
+    protected int block; 
     private boolean dead; 
     private int vulnerable=0; 
     private int weakened=0; 
@@ -84,11 +84,14 @@ public class Entity extends Actor
         this.weakened+=weaken; 
     }
     public void turnPassed(){
-        if (vulnerable>0){
+         if (vulnerable>0){
         vulnerable--; 
-    }
-    if (weakened>0){
+      }
+      if (weakened>0){
         weakened--; 
-    }
+      }
+      if (this==(Enemy)this){
+          ((Enemy)this).attackPattern(); 
+      }
     }
 }

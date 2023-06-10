@@ -34,10 +34,12 @@ public class FightWorld extends World
         initialDeck.add(new Card(3));
         initialDeck.add(new Card(4));
         
-        deck = new Deck(initialDeck); 
-        enemies.add(new JawWorm(42,42,deck,this));
-        enemies.add(new JawWorm(42,42,deck,this));
-        player = new Player(80,80,deck,this);  
+        deck = new Deck(initialDeck);
+        player = new Player(80,80,deck,this);
+        
+        enemies.add(new JawWorm(42,42,deck,this,player));
+        enemies.add(new JawWorm(42,42,deck,this,player));
+          
         etb = new EndTurnButton(deck); 
         
         addObject(deck,0,0);

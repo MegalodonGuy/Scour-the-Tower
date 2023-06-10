@@ -24,7 +24,7 @@ public class Util
             Card card =(Card)hand.get(i);
             world.addObject(card,250+120*i,750); 
             
-            world.showText(""+deck.getMaxEnergy()+"/"+deck.getAvailableEnergy(),100,700);
+            world.showText(""+deck.getAvailableEnergy()+"/"+deck.getMaxEnergy(),100,700);
         }
     }
     public static ArrayList<Object> cloneContents(ArrayList<Object> cloner){

@@ -8,7 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Enemy extends Entity
 {
-    public Enemy(int maxHealth, int health,Deck deck, FightWorld world){
+    Player player;
+    public Enemy(int maxHealth, int health,Deck deck, FightWorld world,Player player){
      super(maxHealth, health, deck, world);
+     this.player=player; 
+    }
+    // default, overide in specific enemy 
+    protected void attackPattern(){
+        System.out.println("hey");
     }
 }
