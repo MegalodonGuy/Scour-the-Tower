@@ -1,9 +1,10 @@
 #Greenfoot project file
 class.Card.image=Cleave.png
+class.Deck.image=Null.png
 class.EndTurnButton.image=End.png
-class.FightWorld.image=brick.jpg
+class.FightWorld.image=ActOne.png
 class.JawWorm.image=JawWorm.png
-class.Player.image=Player.png
+class.Player.image=Ironclad.png
 dependency1.from=FightWorld
 dependency1.to=Deck
 dependency1.type=UsesDependency

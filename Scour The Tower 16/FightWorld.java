@@ -14,6 +14,8 @@ public class FightWorld extends World
     private Deck deck;
     private Player player;
     private EndTurnButton etb;  
+    
+    GreenfootImage image; 
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -23,8 +25,11 @@ public class FightWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1); 
         
+        image = new GreenfootImage("ActOne.png");
         
-
+        image.scale(1000,800);
+        getBackground().drawImage(image,0,0);
+        
         initialDeck.add(new Card(1)); 
         initialDeck.add(new Card(1)); 
         initialDeck.add(new Card(1)); 

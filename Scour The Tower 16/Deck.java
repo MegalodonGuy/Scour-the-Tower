@@ -53,6 +53,7 @@ public class Deck extends Actor
          Card card = (Card)hand.get(i);
          getWorld().removeObject(card); // clears card off world so it can be reused
          card.deselect();
+         setSelected(null);
         }
         hand.clear(); 
         energy=3; 
@@ -63,6 +64,7 @@ public class Deck extends Actor
         getWorld().removeObject(usedCard);// clears card off world so it can be reused
         hand.remove(card); 
         usedCard.deselect();  
+        setSelected(null);
     }
     
     public void playedCard(Object card){
