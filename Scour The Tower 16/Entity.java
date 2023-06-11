@@ -11,11 +11,15 @@ public class Entity extends Actor
     protected int maxHealth; 
     protected int health; 
     protected Deck deck; 
-    private int block; 
-    private boolean dead; 
-    private int vulnerable=0; 
-    private int weakened=0; 
+    protected int block; 
+    protected boolean dead; 
+    protected int vulnerable=0; 
+    protected int weakened=0; 
+    protected int strength=0; // added dmg on to every attack
+    protected int dex=0; // added block on every block 
+    
     private FightWorld world;
+    
     public Entity(int maxHealth, int health,Deck deck, FightWorld world){
      this.maxHealth=maxHealth;
      this.health=health;
@@ -33,19 +37,36 @@ public class Entity extends Actor
             // if card used on character
             if (Deck.getSelectedCard()!=null){
              Card card = (Card)Deck.getSelectedCard();
+             if (card.getEnergy()>deck.getAvailableEnergy()){
+                 return; 
+             }
              if (card.getTarget()){
-             hit(card.getDamage(),card.getVulnerable(),card.getWeaken()); 
-             deck.discardCard(card);
+             hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken()); 
+             deck.playedCard(card);
             }
             else{
                 world.cardUsedOnWorld(); 
             }
             }
         } 
+        
     }
     
     public void hit(int damage,int vulnerable, int weaken){
-        health-=damage;
+        double dmgMod=1; 
+        if (this.vulnerable>0){
+        dmgMod*=1.5; 
+        }
+        int dmg=0;
+        int tempBlock = (block-(damage*=dmgMod)); // take away health = to the damage with modifiers but remove the damage that can get blocked
+        if (tempBlock<=0){ // if attack broke through block
+            dmg=(-1*tempBlock);
+            block=0; 
+        }
+        else{
+            block=tempBlock;
+        }
+        health-=dmg; 
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
         if (health<=0 && !dead){
@@ -55,6 +76,9 @@ public class Entity extends Actor
     }
     public void heal (int health){ 
         this.health+=health;
+        if (health>maxHealth){ 
+            health=maxHealth;
+        }
     }
     public void reduceMaxHealth(int reduction){
         maxHealth-=reduction;
@@ -66,7 +90,7 @@ public class Entity extends Actor
         reduceMaxHealth(-promotion); 
     }
     public void block (int block){
-        this.block+=block; 
+        this.block+=(block+dex); 
     }
     public void vulnerable(int vulnerable){
         this.vulnerable+=vulnerable; 
@@ -74,8 +98,20 @@ public class Entity extends Actor
     public void weaken(int weaken){
         this.weakened+=weaken; 
     }
+    public void increaseStrength(int strength){
+        this.strength+=strength;
+    }
+    public void increaseDex(int dex){
+        this.dex+=dex;
+    }
+    
     public void turnPassed(){
+      this.block=0;
+         if (vulnerable>0){
         vulnerable--; 
+      }
+      if (weakened>0){
         weakened--; 
+      } 
     }
 }

@@ -26,5 +26,10 @@ public class Player extends Entity
             //lose world 
         }
     }
-    
+    public int getStrength(){
+        return strength;
+    }
+    public int getDex(){
+        return dex;
+    }
 }

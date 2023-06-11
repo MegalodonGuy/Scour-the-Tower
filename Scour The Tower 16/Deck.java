@@ -15,10 +15,13 @@ public class Deck extends Actor
     private ArrayList<Object> discardPile = new ArrayList<Object>(); // cards go here after used or turn ended
     private ArrayList<Object> exhaustPile = new ArrayList<Object>();// exhaust cards go here so they cannot reappear during the current fight after played
     private static Object selectedCard; // card selected to be used, one at a time
-    
+    private int energy; // total energy, will deplete from card cost (mana)
+    private int maxEnergy;
       public Deck(ArrayList<Object> deck){
         this.deck=Util.cloneContents(deck); 
         drawPile=Util.cloneContents(deck); 
+        maxEnergy=3; 
+        energy=maxEnergy;
         deal();
     }
     /**
@@ -50,8 +53,10 @@ public class Deck extends Actor
          Card card = (Card)hand.get(i);
          getWorld().removeObject(card); // clears card off world so it can be reused
          card.deselect();
+         setSelected(null);
         }
         hand.clear(); 
+        energy=3; 
     }
     public void discardCard(Object card){
         Card usedCard = (Card)card; 
@@ -59,6 +64,12 @@ public class Deck extends Actor
         getWorld().removeObject(usedCard);// clears card off world so it can be reused
         hand.remove(card); 
         usedCard.deselect();  
+        setSelected(null);
+    }
+    
+    public void playedCard(Object card){
+        this.energy-=((Card)card).getEnergy(); 
+        discardCard(card); 
     }
     
     public ArrayList<Object> getHand(){
@@ -70,5 +81,12 @@ public class Deck extends Actor
     
     public static void setSelected(Object card){
         selectedCard=card; 
+    }
+    
+    public int getAvailableEnergy(){
+        return energy; 
+    }
+    public int getMaxEnergy(){
+        return maxEnergy; 
     }
 }
