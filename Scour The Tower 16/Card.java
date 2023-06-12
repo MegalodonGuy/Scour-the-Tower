@@ -58,6 +58,12 @@ public class Card extends Actor
             attackNum=4;
             exhaust=true;
             break;
+            case 6:
+            image = new GreenfootImage("SwordBoomerang.png");
+            setStats(3,0,1);
+            attackNum=3;
+            target=false;
+            break;
         }
         image.scale(150,194);
         setImage(image);
