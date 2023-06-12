@@ -21,15 +21,20 @@ public class Card extends Actor
     private boolean selected = false;
     private boolean target; // is it a non target or target card? - assumes random target for attacking
     private boolean aoe; // does it effect every enemy? (or every enemy + yourself)
-    
+    private int attackNum; // amount of attacks(multi attacks)
+    private boolean exhaust; 
     GreenfootImage image; 
     public Card(int CardID){
         this.CardID = CardID;
+        
+        attackNum=1;// by default 
+        aoe=false;
+        target=true;
+        exhaust= false;
         switch (CardID){
             case 1: 
             image = new GreenfootImage("Strike.png"); 
             setStats(6,0,1); //attack damage, block amount and energy cost
-            target=true; 
             break;
             case 2:
             image = new GreenfootImage("Defend.png");
@@ -40,13 +45,23 @@ public class Card extends Actor
             image = new GreenfootImage("Bash.png");
             setStats(8,0,2);
             vulnerable=2;  
-            target=true;
             break;
             case 4:
             image = new GreenfootImage("Cleave.png");
             setStats(8,0,1);
-            target=true;  
             aoe=true; 
+            target=false;
+            break;
+            case 5:
+            image = new GreenfootImage("Pummel.png");
+            setStats(2,0,1);
+            attackNum=4;
+            exhaust=true;
+            break;
+            case 6:
+            image = new GreenfootImage("SwordBoomerang.png");
+            setStats(3,0,1);
+            attackNum=3;
             target=false;
             break;
         }
@@ -119,5 +134,11 @@ public class Card extends Actor
     }
     public boolean getAOE(){
         return aoe; 
+    }
+    public int getAttackNum(){
+        return attackNum; 
+    }
+    public boolean getExhaust(){
+        return exhaust; 
     }
 }

@@ -35,18 +35,21 @@ public class Entity extends Actor
     {
         if (Greenfoot.mouseClicked(this)){
             // if card used on character
-            if (Deck.getSelectedCard()!=null){
-             Card card = (Card)Deck.getSelectedCard();
-             if (card.getEnergy()>deck.getAvailableEnergy()){
+                if (Deck.getSelectedCard()!=null){
+                Card card = (Card)Deck.getSelectedCard();
+                if (card.getEnergy()>deck.getAvailableEnergy()){
                  return; 
-             }
-             if (card.getTarget()){
-             hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken()); 
-             deck.playedCard(card);
-            }
-            else{
+                }
+                 if (card.getTarget()){
+                 for (int i=0; i<card.getAttackNum(); i++){
+                  hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken()); 
+                  
+                }
+                deck.playedCard(card);
+                }
+                else{
                 world.cardUsedOnWorld(); 
-            }
+                }
             }
         } 
         
