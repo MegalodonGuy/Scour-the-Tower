@@ -8,8 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Entity
 {
+    FightWorld world;
     public Player(int maxHealth, int health,Deck deck, FightWorld world){
      super(maxHealth, health, deck, world);
+     this.world=world; 
     }
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
@@ -17,7 +19,9 @@ public class Player extends Entity
      */
     public void act()
     {
-        // Add your action code here.
+        if (Greenfoot.mouseClicked(this)){
+            world.cardUsedOnWorld(); 
+        } 
     }
     @Override
     public void hit(int damage,int vulnerable, int weaken){
