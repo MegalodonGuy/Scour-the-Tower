@@ -115,6 +115,10 @@ public class Entity extends Actor
         return this.weakened; 
     }
     
+    public int getBlock(){
+        return block;
+    }
+    
     public void turnPassed(){
       this.block=0;
          if (vulnerable>0){

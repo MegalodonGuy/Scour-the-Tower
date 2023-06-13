@@ -69,6 +69,10 @@ public class Card extends Actor
             setStats(12,0,2);  
             weaken=2;
             break;
+            case 8:
+            image = new GreenfootImage("BodySlam.png");
+            setStats(0,0,1);  
+            break;
         }
         image.scale(150,194);
         setImage(image);

@@ -23,4 +23,16 @@ public class Enemy extends Entity
        ((Enemy)this).attackPattern(); 
       
     }
+    
+    public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
+        if (Deck.getSelectedCard()==null){
+            return;
+        }
+        Card card = (Card)(Deck.getSelectedCard());
+        if (card.getCardID()==8){
+            damage=player.getBlock();
+        }
+        super.hit(damage, vulnerable, weaken, attackerWeakend);
+        
+    }
 }
