@@ -42,7 +42,7 @@ public class Entity extends Actor
                 }
                  if (card.getTarget()){
                  for (int i=0; i<card.getAttackNum(); i++){
-                  hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken()); 
+                  hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
                   
                 }
                 deck.playedCard(card);
@@ -55,10 +55,13 @@ public class Entity extends Actor
         
     }
     
-    public void hit(int damage,int vulnerable, int weaken){
+    public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
         double dmgMod=1; 
         if (this.vulnerable>0){
         dmgMod*=1.5; 
+        }
+        if (attackerWeakend>0){
+        dmgMod*=0.75; 
         }
         int dmg=0;
         int tempBlock = (block-(damage*=dmgMod)); // take away health = to the damage with modifiers but remove the damage that can get blocked
@@ -106,6 +109,10 @@ public class Entity extends Actor
     }
     public void increaseDex(int dex){
         this.dex+=dex;
+    }
+    
+    public int getWeaken(){
+        return this.weakened; 
     }
     
     public void turnPassed(){

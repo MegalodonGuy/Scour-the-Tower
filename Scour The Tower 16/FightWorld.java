@@ -87,7 +87,7 @@ public class FightWorld extends World
             for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 int ran = (int)(Math.random()*enemies.size());
-                ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken());
+                ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
             }
             deck.playedCard(card);
         }
@@ -95,7 +95,7 @@ public class FightWorld extends World
             for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){
-                    ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken());
+                    ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
                 }
             }
             deck.playedCard(card);

@@ -24,8 +24,8 @@ public class Player extends Entity
         } 
     }
     @Override
-    public void hit(int damage,int vulnerable, int weaken){
-        super.hit(damage, vulnerable, weaken); 
+    public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
+        super.hit(damage, vulnerable, weaken, attackerWeakend); 
         if (health<=0){
             //lose world 
         }
