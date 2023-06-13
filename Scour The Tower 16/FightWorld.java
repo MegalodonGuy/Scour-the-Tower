@@ -43,6 +43,8 @@ public class FightWorld extends World
         initialDeck.add(new Card(4));
         initialDeck.add(new Card(5));
         initialDeck.add(new Card(6));
+        initialDeck.add(new Card(7));
+        
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
