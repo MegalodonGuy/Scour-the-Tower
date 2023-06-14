@@ -76,7 +76,6 @@ public class Card extends Actor
             case 9:
             image = new GreenfootImage("FiendFire.png");
             setStats(7,0,2); 
-            target=false;
             exhaust=true;
             attackNum=1;
             break;
