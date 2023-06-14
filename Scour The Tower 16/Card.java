@@ -64,6 +64,15 @@ public class Card extends Actor
             attackNum=3;
             target=false;
             break;
+            case 7:
+            image = new GreenfootImage("Clothesline.png");
+            setStats(12,0,2);  
+            weaken=2;
+            break;
+            case 8:
+            image = new GreenfootImage("BodySlam.png");
+            setStats(0,0,1);  
+            break;
         }
         image.scale(150,194);
         setImage(image);

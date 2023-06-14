@@ -11,7 +11,7 @@ public class JawWorm extends Enemy
     private boolean firstMove;
     private FightWorld world;
     GreenfootImage image;
-    
+
     public JawWorm(int health, int maxHealth,Deck deck, FightWorld world, Player player){
         super(maxHealth, health, deck, world,player);
         firstMove=true;
@@ -20,7 +20,7 @@ public class JawWorm extends Enemy
         image.scale(300,300);
         setImage(image);
     } 
-    
+
     @Override
     protected void attackPattern(){
         if (dead){
@@ -31,7 +31,7 @@ public class JawWorm extends Enemy
             firstMove=false; 
             return; 
         }
-        
+
         int ran= ((int)(Math.random()*100))+1; 
         if (ran>=1 && ran<=25){
             move1(); 
@@ -42,17 +42,25 @@ public class JawWorm extends Enemy
         else {
             move3();
         }
-        
+
     }
+
     protected void move1(){ //chomp
-         player.hit(11+strength,0,0);
+        player.hit(11+strength,0,0,weakened);
+
+        System.out.println("chomp");
     }
+
     protected void move2(){//thrash
-      player.hit(7+strength,0,0);
-      block(5); 
+        player.hit(7+strength,0,0,weakened);
+        block(5); 
+        System.out.println("thrash");
     }
+
     protected void move3(){ // bellow
-      increaseStrength(3);  
-      block(5);
+        increaseStrength(3);  
+        block(5);
+        System.out.println("bellow");
     }
+
 }
