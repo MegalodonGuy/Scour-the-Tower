@@ -45,7 +45,7 @@ public class FightWorld extends World
         initialDeck.add(new Card(6));
         initialDeck.add(new Card(7));
         initialDeck.add(new Card(8));
-        
+        initialDeck.add(new Card(9));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -80,20 +80,28 @@ public class FightWorld extends World
 
     public void cardUsedOnWorld(){
         Card card = (Card)Deck.getSelectedCard();
+        int attackNum = card.getAttackNum();
         if (card.getEnergy()>deck.getAvailableEnergy()){
             return; 
         }
 
+        if (card.getCardID()==9){
+            attackNum=deck.getHand().size()-1;
+        }
+
         if (!card.getTarget() &&!card.getAOE()){
-            for (int i=0; i<card.getAttackNum(); i++){
+            for (int i=0; i<attackNum; i++){
                 player.block(card.getBlock()); 
                 int ran = (int)(Math.random()*enemies.size());
                 ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
             }
             deck.playedCard(card);
+            if (card.getCardID()==9){
+                deck.exhaustHand();
+            }
         }
         else if (card.getAOE()){
-            for (int i=0; i<card.getAttackNum(); i++){
+            for (int i=0; i<attackNum; i++){
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){
                     ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
@@ -102,7 +110,10 @@ public class FightWorld extends World
             deck.playedCard(card);
         }
 
+        
+
     }
+
     public Player getPlayer(){
         return player; 
     }

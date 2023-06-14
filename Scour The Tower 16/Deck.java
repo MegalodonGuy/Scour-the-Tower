@@ -62,6 +62,14 @@ public class Deck extends Actor
         hand.clear(); 
         energy=3; 
     }
+    
+    public void exhaustHand(){
+        for (int x=0; x<hand.size(); x++){
+            exhaustPile.add(hand.get(x));
+            getWorld().removeObject((Card)(hand.get(x)));
+        }
+        hand.clear();
+    }
 
     public void discardCard(Object card){
         Card usedCard = (Card)card;
@@ -78,8 +86,9 @@ public class Deck extends Actor
     }
 
     public void playedCard(Object card){
-        discardCard(card); 
+        System.out.println("Played" + ((Card)card).getEnergy());
         this.energy-=((Card)card).getEnergy(); 
+        discardCard(card); 
     }
 
     public ArrayList<Object> getHand(){
