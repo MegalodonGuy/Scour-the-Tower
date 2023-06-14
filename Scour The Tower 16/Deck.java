@@ -86,7 +86,6 @@ public class Deck extends Actor
     }
 
     public void playedCard(Object card){
-        System.out.println("Played" + ((Card)card).getEnergy());
         this.energy-=((Card)card).getEnergy(); 
         discardCard(card); 
     }
