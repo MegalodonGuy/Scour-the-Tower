@@ -40,8 +40,13 @@ public class Entity extends Actor
                 if (card.getEnergy()>deck.getAvailableEnergy()){
                  return; 
                 }
+                int attackNum=card.getAttackNum();
+                if (card.getCardID()==9){
+                 attackNum=deck.getHand().size()-1;
+                 deck.exhaustHand();
+                }
                  if (card.getTarget()){
-                 for (int i=0; i<card.getAttackNum(); i++){
+                 for (int i=0; i<attackNum; i++){
                   hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
                   
                 }

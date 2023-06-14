@@ -36,6 +36,7 @@ public class Enemy extends Entity
         if (card.getCardID()==8){
             damage=player.getBlock();
         }
+        
  
         super.hit(damage, vulnerable, weaken, attackerWeakend);
 

@@ -85,10 +85,6 @@ public class FightWorld extends World
             return; 
         }
 
-        if (card.getCardID()==9){
-            attackNum=deck.getHand().size()-1;
-        }
-
         if (!card.getTarget() &&!card.getAOE()){
             for (int i=0; i<attackNum; i++){
                 player.block(card.getBlock()); 
@@ -96,9 +92,7 @@ public class FightWorld extends World
                 ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
             }
             deck.playedCard(card);
-            if (card.getCardID()==9){
-                deck.exhaustHand();
-            }
+            
         }
         else if (card.getAOE()){
             for (int i=0; i<attackNum; i++){
