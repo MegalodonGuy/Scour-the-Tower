@@ -100,17 +100,22 @@ public class Card extends Actor
         if (Greenfoot.mouseClicked(this)){
              if (!selected){
              Deck.setSelected(this);
-             selected=true;
+             
              setLocation(getX(), getY()-100);
             }
-            else{
-             Deck.setSelected(null);  
-             selected=false;
+            else{ 
+             Deck.setSelected(null);
              //setLocation(getX(), getY()+100);
             }
             }
-        
-    }
+        if (this==Deck.getSelectedCard()){
+            selected=true;
+        }
+        else{
+            selected=false;
+        }
+        }
+    
     private void setStats(int damage, int block,int energy){
         this.damage = damage; 
         this.block = block; 
