@@ -87,6 +87,21 @@ public class Card extends Actor
             image = new GreenfootImage("IronWave.png");
             setStats(5,5,1); 
             break;
+            case 12:
+            image = new GreenfootImage("PommelStrike.png");
+            setStats(9,0,1); 
+            break;
+            case 13:
+            image = new GreenfootImage("Thunderclap.png");
+            setStats(4,0,1); 
+            vulnerable=1;
+            aoe=true;
+            break;
+            case 14:
+            image = new GreenfootImage("TwinStrike.png");
+            setStats(5,0,1); 
+            attackNum=2;
+            break;
         }
         image.scale(150,194);
         setImage(image);
