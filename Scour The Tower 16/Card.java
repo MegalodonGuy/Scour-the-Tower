@@ -97,12 +97,15 @@ public class Card extends Actor
              if (!selected){
              Deck.setSelected(this);
              selected=true;
+             setLocation(getX(), getY()-100);
             }
             else{
              Deck.setSelected(null);  
              selected=false;
+             //setLocation(getX(), getY()+100);
             }
             }
+        
     }
     private void setStats(int damage, int block,int energy){
         this.damage = damage; 
