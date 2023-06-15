@@ -83,6 +83,10 @@ public class Card extends Actor
             setStats(0,8,1); 
             target=false;
             break;
+            case 11:
+            image = new GreenfootImage("IronWave.png");
+            setStats(5,5,1); 
+            break;
         }
         image.scale(150,194);
         setImage(image);

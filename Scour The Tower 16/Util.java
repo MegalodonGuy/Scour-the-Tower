@@ -21,12 +21,14 @@ public class Util
 
     public static void updateCardVisuals(ArrayList<Object> hand, Deck deck, World world){
         hand = Util.cloneContents(deck.getHand());
-        
-        int cardSpacing=150;
+
+        int cardSpacing=300;
         double temp=cardSpacing; 
-        for (int i=0; i<hand.size(); i++){
-            temp/=1.1;
+
+        for (int x=0; x<hand.size(); x++){
+            temp=cardSpacing*(Math.pow(1-0.2,x));
         }
+        temp+=10;
         cardSpacing=(int)temp;
         int initialCardSpacing=200;
         int ySpacing=800;
@@ -39,7 +41,7 @@ public class Util
                 world.removeObject(card);
                 world.addObject(card, x, y);
             }
-            else{
+            else{ 
                 ySpacing=800;
             }
             world.addObject(card,initialCardSpacing+cardSpacing*i+1,ySpacing); 
