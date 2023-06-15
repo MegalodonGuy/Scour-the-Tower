@@ -35,11 +35,7 @@ public class Util
         for (int i=0; i<hand.size(); i++){
             Card card =(Card)hand.get(i);
             if (card==Deck.getSelectedCard()){
-                ySpacing-=100;
-                int x = card.getX();
-                int y = card.getY();
-                world.removeObject(card);
-                world.addObject(card, x, y);
+                ySpacing-=200;
             }
             else{ 
                 ySpacing=800;
