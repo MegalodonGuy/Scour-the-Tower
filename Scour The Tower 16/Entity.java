@@ -42,6 +42,7 @@ public class Entity extends Actor
                     return; 
                 }
                 int attackNum=card.getAttackNum();
+                //cards with special effects
                 if (card.getCardID()==9){
                     attackNum=deck.getHand().size()-1;
                     deck.exhaustHand();
@@ -50,6 +51,13 @@ public class Entity extends Actor
                     deck.drawRandom();
                     deck.drawRandom();
                 }
+                else if (card.getCardID()==15){
+                    world.getPlayer().takeStaticDamage(2); // dont want other effects to take place
+                }
+                else if (card.getCardID()==17){
+                    this.increaseStrength(-2); 
+                }
+                
                 if (card.getTarget()){
                     for (int i=0; i<attackNum; i++){
                         hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
@@ -83,18 +91,28 @@ public class Entity extends Actor
             block=tempBlock;
         }
         health-=dmg; 
+
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
         if (health<=0 && !dead){
             getWorld().removeObject(this); 
             dead=true; 
         }
+        
     }
 
     public void heal (int health){ 
         this.health+=health;
         if (health>maxHealth){ 
             health=maxHealth;
+        }
+    }
+    
+    public void takeStaticDamage(int dmg){
+        this.health-=dmg;
+        if (health<=0 && !dead){
+            getWorld().removeObject(this); 
+            dead=true; 
         }
     }
 
@@ -139,6 +157,9 @@ public class Entity extends Actor
 
     public int getBlock(){
         return block;
+    }
+    public int getHealth(){
+        return health;
     }
 
     public void turnPassed(){

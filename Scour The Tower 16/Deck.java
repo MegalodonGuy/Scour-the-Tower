@@ -76,6 +76,9 @@ public class Deck extends Actor
         if (usedCard.getExhaust()){
             exhaustPile.add(card); 
         }
+        else if(usedCard.getPower()){
+            //dont put it anywhere, power is used
+        }
         else{
             discardPile.add(card); 
         }

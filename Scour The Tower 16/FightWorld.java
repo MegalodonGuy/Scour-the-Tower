@@ -48,6 +48,11 @@ public class FightWorld extends World
         initialDeck.add(new Card(12));
         initialDeck.add(new Card(13));
         initialDeck.add(new Card(14));
+        initialDeck.add(new Card(15));
+        initialDeck.add(new Card(16));
+        initialDeck.add(new Card(17));
+        initialDeck.add(new Card(18));
+        initialDeck.add(new Card(19));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -68,10 +73,10 @@ public class FightWorld extends World
     public void act(){
         Util.updateCardVisuals(hand, deck, this);
         for (int x=0; x< enemies.size(); x++){
-                if(((Entity)enemies.get(x)).getDead()){
-                    enemies.remove(x);
-                }
+            if(((Entity)enemies.get(x)).getDead()){
+                enemies.remove(x);
             }
+        }
         if (etb.getTurnPassed()){
             for (int x=0; x< enemies.size(); x++){
                 ((Entity)enemies.get(x)).turnPassed();
@@ -87,11 +92,17 @@ public class FightWorld extends World
 
     public void cardUsedOnWorld(){
         Card card = (Card)Deck.getSelectedCard();
+        if (card==null){
+            return;
+        }
         if (card.getEnergy()>deck.getAvailableEnergy()){
             return; 
         }
         if (card.getCardID()==10){
             deck.drawRandom();
+        }
+        else if(card.getCardID()==18){
+            player.increaseStrength(2);
         }
 
         if (!card.getTarget() &&!card.getAOE()){
@@ -101,22 +112,24 @@ public class FightWorld extends World
                 ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
             }
             deck.playedCard(card);
-            
+
         }
         else if (card.getAOE()){
             for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){
+                    int previousHealth=((Entity)enemies.get(x)).getHealth();
                     ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
+                    int newHealth=((Entity)enemies.get(x)).getHealth();
+                    if(card.getCardID()==19){
+                        player.heal(previousHealth-newHealth); // sorta bad way to do it but it works
+                    }
                 }
             }
             deck.playedCard(card);
         }
 
-        
-
     }
-
     public Player getPlayer(){
         return player; 
     }

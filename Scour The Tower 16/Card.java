@@ -23,6 +23,7 @@ public class Card extends Actor
     private boolean aoe; // does it effect every enemy? (or every enemy + yourself)
     private int attackNum; // amount of attacks(multi attacks)
     private boolean exhaust; 
+    private boolean power;
     GreenfootImage image; 
     public Card(int CardID){
         this.CardID = CardID;
@@ -31,6 +32,7 @@ public class Card extends Actor
         aoe=false;
         target=true;
         exhaust= false;
+        power=false;
         switch (CardID){
             case 1: 
             image = new GreenfootImage("Strike.png"); 
@@ -50,7 +52,6 @@ public class Card extends Actor
             image = new GreenfootImage("Cleave.png");
             setStats(8,0,1);
             aoe=true; 
-            target=false;
             break;
             case 5:
             image = new GreenfootImage("Pummel.png");
@@ -102,9 +103,34 @@ public class Card extends Actor
             setStats(5,0,1); 
             attackNum=2;
             break;
+            case 15:
+            image = new GreenfootImage("Hemokinesis.png");
+            setStats(15,0,1); 
+            break;
+            case 16:
+            image = new GreenfootImage("Bludgeon.png");
+            setStats(32,0,3);
+            break;
+            case 17: 
+            image = new GreenfootImage("Disarm.png");
+            setStats(0,0,1);
+            exhaust=true;
+            break;
+            case 18: 
+            image = new GreenfootImage("Inflame.png");
+            setStats(0,0,1);
+            target=false;
+            power=true;
+            break;
+            case 19: 
+            image = new GreenfootImage("Reaper.png");
+            setStats(4,0,2);
+            aoe=true;
+            target=false;
+            break;
         }
         image.scale(150,194);
-        setImage(image);
+        setImage(image); 
     } 
     /**
      * Act - do whatever the Cards wants to do. This method is called whenever
@@ -186,5 +212,8 @@ public class Card extends Actor
     }
     public boolean getExhaust(){
         return exhaust; 
+    }
+    public boolean getPower(){
+        return power; 
     }
 }
