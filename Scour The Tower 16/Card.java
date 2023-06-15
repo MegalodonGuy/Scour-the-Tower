@@ -77,7 +77,11 @@ public class Card extends Actor
             image = new GreenfootImage("FiendFire.png");
             setStats(7,0,2); 
             exhaust=true;
-            attackNum=1;
+            break;
+            case 10:
+            image = new GreenfootImage("ShrugItOff.png");
+            setStats(0,8,1); 
+            target=false;
             break;
         }
         image.scale(150,194);
