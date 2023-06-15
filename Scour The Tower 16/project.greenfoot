@@ -1,6 +1,6 @@
 #Greenfoot project file
 class.Card.image=BodySlam.png
-class.Deck.image=Null.png
+class.Deck.image=1.png
 class.EndTurnButton.image=End.png
 class.FightWorld.image=ActOne.png
 class.JawWorm.image=JawWorm.png
@@ -84,7 +84,7 @@ editor.fx.0.height=739
 editor.fx.0.width=816
 editor.fx.0.x=552
 editor.fx.0.y=100
-height=1056
+height=1055
 package.numDependencies=25
 package.numTargets=10
 project.charset=UTF-8
@@ -175,4 +175,4 @@ version=3.0.0
 width=1936
 world.lastInstantiated=FightWorld
 xPosition=0
-yPosition=0
+yPosition=1

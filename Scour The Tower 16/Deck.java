@@ -60,7 +60,7 @@ public class Deck extends Actor
             setSelected(null);
         }
         hand.clear(); 
-        energy=3; 
+        energy=maxEnergy; 
     }
     
     public void exhaustHand(){

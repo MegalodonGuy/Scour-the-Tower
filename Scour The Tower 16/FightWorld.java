@@ -31,10 +31,7 @@ public class FightWorld extends World
         getBackground().drawImage(image,0,0);
 
         initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1)); 
+        initialDeck.add(new Card(1));  
         initialDeck.add(new Card(2)); 
         initialDeck.add(new Card(2)); 
         initialDeck.add(new Card(2)); 
@@ -46,6 +43,7 @@ public class FightWorld extends World
         initialDeck.add(new Card(7));
         initialDeck.add(new Card(8));
         initialDeck.add(new Card(9));
+        initialDeck.add(new Card(10));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -83,6 +81,9 @@ public class FightWorld extends World
         int attackNum = card.getAttackNum();
         if (card.getEnergy()>deck.getAvailableEnergy()){
             return; 
+        }
+        if (card.getCardID()==10){
+            deck.drawRandom();
         }
 
         if (!card.getTarget() &&!card.getAOE()){
