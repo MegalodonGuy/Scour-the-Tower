@@ -83,6 +83,10 @@ public class Card extends Actor
             setStats(0,8,1); 
             target=false;
             break;
+            case 11:
+            image = new GreenfootImage("IronWave.png");
+            setStats(5,5,1); 
+            break;
         }
         image.scale(150,194);
         setImage(image);
@@ -97,12 +101,15 @@ public class Card extends Actor
              if (!selected){
              Deck.setSelected(this);
              selected=true;
+             setLocation(getX(), getY()-100);
             }
             else{
              Deck.setSelected(null);  
              selected=false;
+             //setLocation(getX(), getY()+100);
             }
             }
+        
     }
     private void setStats(int damage, int block,int energy){
         this.damage = damage; 

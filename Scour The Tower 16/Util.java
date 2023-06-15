@@ -21,58 +21,31 @@ public class Util
 
     public static void updateCardVisuals(ArrayList<Object> hand, Deck deck, World world){
         hand = Util.cloneContents(deck.getHand());
-        int cardSpacing=150;
+
+        int cardSpacing=300;
         double temp=cardSpacing; 
-        for (int i=0; i<hand.size(); i++){
-            temp/=1.1;
+
+        for (int x=0; x<hand.size(); x++){
+            temp=cardSpacing*(Math.pow(1-0.2,x));
         }
+        temp+=10;
         cardSpacing=(int)temp;
         int initialCardSpacing=200;
+        int ySpacing=800;
         for (int i=0; i<hand.size(); i++){
             Card card =(Card)hand.get(i);
-
-            switch(i){
-                case 0:
-                    world.addObject(card,initialCardSpacing,700);     
-                    break;
-                case 1:
-                    world.addObject(card,initialCardSpacing+cardSpacing,700); 
-                    card.setLocation(initialCardSpacing+cardSpacing,700);
-                    break;
-                case 2:
-                    world.addObject(card,initialCardSpacing+cardSpacing*2,700);  
-                    card.setLocation(initialCardSpacing+cardSpacing*2,700);
-                    break;
-                case 3:
-                    world.addObject(card,initialCardSpacing+cardSpacing*3,700); 
-                    card.setLocation(initialCardSpacing+cardSpacing*3,700);
-                    break;
-                case 4:
-                    world.addObject(card,initialCardSpacing+cardSpacing*4,700); 
-                    card.setLocation(initialCardSpacing+cardSpacing*4,700);
-                    break;
-                case 5:
-                    world.addObject(card,initialCardSpacing+cardSpacing*5,700);
-                    card.setLocation(initialCardSpacing+cardSpacing*5,700);
-                    break;
-                case 6:
-                    world.addObject(card,initialCardSpacing+cardSpacing*6,700);  
-                    card.setLocation(initialCardSpacing+cardSpacing*6,700);
-                    break;
-                case 7:
-                    world.addObject(card,initialCardSpacing+cardSpacing*7,700); 
-                    card.setLocation(initialCardSpacing+cardSpacing*7,700);
-                    break;
-                case 8:
-                    world.addObject(card,initialCardSpacing+cardSpacing*8,700);
-                    card.setLocation(initialCardSpacing+cardSpacing*8,700);
-                    break;
-                case 9:
-                    world.addObject(card,initialCardSpacing+cardSpacing*9,700); 
-                    card.setLocation(initialCardSpacing+cardSpacing*9,700);
-                    break;
+            if (card==Deck.getSelectedCard()){
+                ySpacing-=100;
+                int x = card.getX();
+                int y = card.getY();
+                world.removeObject(card);
+                world.addObject(card, x, y);
             }
-
+            else{ 
+                ySpacing=800;
+            }
+            world.addObject(card,initialCardSpacing+cardSpacing*i+1,ySpacing); 
+            card.setLocation(initialCardSpacing+cardSpacing*i+1,ySpacing);
         }
 
         world.showText("Energy: "+deck.getAvailableEnergy()+"/"+deck.getMaxEnergy(),75,700);
