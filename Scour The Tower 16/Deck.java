@@ -112,4 +112,8 @@ public class Deck extends Actor
     public int getMaxEnergy(){
         return maxEnergy; 
     }
+    public void gainEnergy(int energy){
+        this.energy+=energy;
+        //can go above max just like in game
+    }
 }

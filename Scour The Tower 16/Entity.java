@@ -61,6 +61,9 @@ public class Entity extends Actor
                 if (card.getTarget()){
                     for (int i=0; i<attackNum; i++){
                         hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
+                        if (card.getCardID()==20&&this.dead){
+                            world.getPlayer().increaseMaxHealth(3);
+                        }
                         world.getPlayer().block(card.getBlock());
                     }
                     deck.playedCard(card);

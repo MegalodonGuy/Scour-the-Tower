@@ -53,6 +53,12 @@ public class FightWorld extends World
         initialDeck.add(new Card(17));
         initialDeck.add(new Card(18));
         initialDeck.add(new Card(19));
+        initialDeck.add(new Card(20));
+        initialDeck.add(new Card(21));
+        initialDeck.add(new Card(22));
+        initialDeck.add(new Card(23));
+        initialDeck.add(new Card(24));
+        initialDeck.add(new Card(25));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -103,6 +109,13 @@ public class FightWorld extends World
         }
         else if(card.getCardID()==18){
             player.increaseStrength(2);
+        }
+        else if(card.getCardID()==25){
+            player.takeStaticDamage(6);
+            deck.drawRandom();
+            deck.drawRandom();
+            deck.drawRandom();
+            deck.gainEnergy(2);
         }
 
         if (!card.getTarget() &&!card.getAOE()){

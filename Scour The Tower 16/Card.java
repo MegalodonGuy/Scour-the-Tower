@@ -126,7 +126,44 @@ public class Card extends Actor
             image = new GreenfootImage("Reaper.png");
             setStats(4,0,2);
             aoe=true;
+            break;
+            case 20: 
+            image = new GreenfootImage("Feed.png");
+            setStats(10,0,1);
+            exhaust=true;
+            break;
+            case 21: 
+            image = new GreenfootImage("Uppercut.png");
+            setStats(13,0,2);
+            weaken=1;
+            vulnerable=1;
+            break;
+            case 22: 
+            image = new GreenfootImage("Intimidate.png");
+            setStats(0,0,1);
+            weaken=1;
+            aoe=true;
+            exhaust=true;
+            break;
+            case 23: 
+            image = new GreenfootImage("Shockwave.png");
+            setStats(0,0,2);
+            weaken=3;
+            vulnerable=3;
+            aoe=true;
+            exhaust=true;
+            break;
+            case 24: 
+            image = new GreenfootImage("Impervious.png");
+            setStats(0,30,2);
             target=false;
+            exhaust=true;
+            break;
+            case 25: 
+            image = new GreenfootImage("Offering.png");
+            setStats(0,0,0);
+            target=false;
+            exhaust=true;
             break;
         }
         image.scale(150,194);
