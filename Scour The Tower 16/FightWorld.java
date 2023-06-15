@@ -64,6 +64,11 @@ public class FightWorld extends World
 
     public void act(){
         Util.updateCardVisuals(hand, deck, this);
+        for (int x=0; x< enemies.size(); x++){
+                if(((Entity)enemies.get(x)).getDead()){
+                    enemies.remove(x);
+                }
+            }
         if (etb.getTurnPassed()){
             for (int x=0; x< enemies.size(); x++){
                 ((Entity)enemies.get(x)).turnPassed();
@@ -79,7 +84,6 @@ public class FightWorld extends World
 
     public void cardUsedOnWorld(){
         Card card = (Card)Deck.getSelectedCard();
-        int attackNum = card.getAttackNum();
         if (card.getEnergy()>deck.getAvailableEnergy()){
             return; 
         }
@@ -88,7 +92,7 @@ public class FightWorld extends World
         }
 
         if (!card.getTarget() &&!card.getAOE()){
-            for (int i=0; i<attackNum; i++){
+            for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 int ran = (int)(Math.random()*enemies.size());
                 ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
@@ -97,7 +101,7 @@ public class FightWorld extends World
             
         }
         else if (card.getAOE()){
-            for (int i=0; i<attackNum; i++){
+            for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){
                     ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());

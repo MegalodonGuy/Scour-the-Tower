@@ -120,6 +120,10 @@ public class Entity extends Actor
         return this.weakened; 
     }
     
+    public boolean getDead(){
+        return this.dead;
+    }
+    
     public int getBlock(){
         return block;
     }
