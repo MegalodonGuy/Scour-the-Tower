@@ -72,6 +72,9 @@ public class Entity extends Actor
                 else if (card.getCardID()==40){ 
                     deck.addIntoDrawPile(new Card(39));
                 }
+                else if (card.getCardID()==42){ 
+                    deck.addIntoDrawPile(new Card(43));
+                }
 
                 if (card.getTarget()){
                     for (int i=0; i<attackNum; i++){
