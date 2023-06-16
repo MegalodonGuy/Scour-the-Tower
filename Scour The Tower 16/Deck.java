@@ -55,6 +55,10 @@ public class Deck extends Actor
         int cardAmount=hand.size();
         for (int i=0; i<cardAmount; i++){
             Card card = (Card)hand.get(0);
+            if (card.getCardID()==36){
+                ((FightWorld)getWorld()).getPlayer().hit(2,0,0,0); // burn hits block
+            }
+            
             if (card.getEthereal()){
                 exhaustCard(card);
             }
@@ -88,6 +92,9 @@ public class Deck extends Actor
 
     public void discardCard(Object card){
         Card usedCard = (Card)card;
+        if (usedCard.getCardID()==36){
+            ((FightWorld)getWorld()).getPlayer().hit(2,0,0,0);
+        }
         if (usedCard.getExhaust()){
             exhaustCard(usedCard); 
         }
@@ -107,6 +114,16 @@ public class Deck extends Actor
         this.energy-=((Card)card).getEnergy(); 
         discardCard(card); 
     }
+    
+    public void addIntoDiscardPile(Card card){
+        discardPile.add(card);
+    }
+    public void addIntoHand(Card card){
+        hand.add(card);
+    }
+    public void addIntoDrawPile(Card card){
+        drawPile.add(card);
+    }
 
     public ArrayList<Object> getHand(){
         return hand;
@@ -123,6 +140,7 @@ public class Deck extends Actor
     public int getAvailableEnergy(){
         return energy; 
     }
+
 
     public int getMaxEnergy(){
         return maxEnergy; 

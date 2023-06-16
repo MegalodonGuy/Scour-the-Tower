@@ -207,7 +207,37 @@ public class Card extends Actor
             break;
             case 33: 
             image = new GreenfootImage("Dropkick.png");
-            setStats(0,5,1);
+            setStats(5,0,1);
+            break;
+            case 34: 
+            image = new GreenfootImage("HeavyBlade.png");
+            setStats(14,0,2);
+            break;
+            case 35: 
+            image = new GreenfootImage("Immolate.png");
+            setStats(21,0,2);
+            aoe=true;
+            break;
+            case 36: 
+            image = new GreenfootImage("Burn.png");
+            setStats(0,0,999999999);
+            break;
+            case 37: 
+            image = new GreenfootImage("Anger.png");
+            setStats(6,0,0);
+            break;
+            case 38: 
+            image = new GreenfootImage("PowerThrough.png");
+            setStats(0,15,1);
+            target=false;
+            break;
+            case 39: 
+            image = new GreenfootImage("Wound.png");
+            setStats(0,0,999999999);
+            break;
+            case 40: 
+            image = new GreenfootImage("WildStrike.png");
+            setStats(12,0,1);
             break;
         }
         image.scale(150,194);

@@ -42,6 +42,7 @@ public class Entity extends Actor
                     return; 
                 }
                 int attackNum=card.getAttackNum();
+                int strengthFactor=1;
                 //cards with special effects
                 if (card.getCardID()==9){
                     attackNum=deck.getHand().size()-1;
@@ -61,10 +62,20 @@ public class Entity extends Actor
                     deck.drawRandom();
                     deck.gainEnergy(1);
                 }
-                
+                else if (card.getCardID()==34){
+                    strengthFactor=3;
+                }
+                else if (card.getCardID()==37){
+                    Card cardCopy = new Card(37); // supposed to be direct copy but I cant be arsed
+                    deck.addIntoDiscardPile(cardCopy);
+                }
+                else if (card.getCardID()==40){ 
+                    deck.addIntoDrawPile(new Card(39));
+                }
+
                 if (card.getTarget()){
                     for (int i=0; i<attackNum; i++){
-                        hit(card.getDamage()+world.getPlayer().getStrength(),card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
+                        hit(card.getDamage()+world.getPlayer().getStrength()*strengthFactor,card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
                         if (card.getCardID()==20&&this.dead){
                             world.getPlayer().increaseMaxHealth(3);
                         }
@@ -105,7 +116,7 @@ public class Entity extends Actor
             getWorld().removeObject(this); 
             dead=true; 
         }
-        
+
     }
 
     public void heal (int health){ 
@@ -114,7 +125,7 @@ public class Entity extends Actor
             health=maxHealth;
         }
     }
-    
+
     public void takeStaticDamage(int dmg){
         this.health-=dmg;
         if (health<=0 && !dead){
@@ -165,6 +176,7 @@ public class Entity extends Actor
     public int getBlock(){
         return block;
     }
+
     public int getHealth(){
         return health;
     }
