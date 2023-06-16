@@ -45,6 +45,33 @@ public class FightWorld extends World
         initialDeck.add(new Card(9));
         initialDeck.add(new Card(10));
         initialDeck.add(new Card(11));
+        initialDeck.add(new Card(12));
+        initialDeck.add(new Card(13));
+        initialDeck.add(new Card(14));
+        initialDeck.add(new Card(15));
+        initialDeck.add(new Card(16));
+        initialDeck.add(new Card(17));
+        initialDeck.add(new Card(18));
+        initialDeck.add(new Card(19));
+        initialDeck.add(new Card(20));
+        initialDeck.add(new Card(21));
+        initialDeck.add(new Card(22));
+        initialDeck.add(new Card(23));
+        initialDeck.add(new Card(24));
+        initialDeck.add(new Card(25));
+        initialDeck.add(new Card(26));
+        initialDeck.add(new Card(27));
+        initialDeck.add(new Card(28));
+        initialDeck.add(new Card(29));
+        initialDeck.add(new Card(30));
+        initialDeck.add(new Card(31));
+        initialDeck.add(new Card(32));
+        initialDeck.add(new Card(33));
+        initialDeck.add(new Card(34));
+        initialDeck.add(new Card(35));
+        initialDeck.add(new Card(37));
+        initialDeck.add(new Card(38));
+        initialDeck.add(new Card(40));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -64,6 +91,11 @@ public class FightWorld extends World
 
     public void act(){
         Util.updateCardVisuals(hand, deck, this);
+        for (int x=0; x< enemies.size(); x++){
+            if(((Entity)enemies.get(x)).getDead()){
+                enemies.remove(x);
+            }
+        }
         if (etb.getTurnPassed()){
             for (int x=0; x< enemies.size(); x++){
                 ((Entity)enemies.get(x)).turnPassed();
@@ -79,37 +111,75 @@ public class FightWorld extends World
 
     public void cardUsedOnWorld(){
         Card card = (Card)Deck.getSelectedCard();
-        int attackNum = card.getAttackNum();
+        if (card==null){
+            return;
+        }
         if (card.getEnergy()>deck.getAvailableEnergy()){
             return; 
         }
         if (card.getCardID()==10){
             deck.drawRandom();
         }
+        else if(card.getCardID()==18){
+            player.increaseStrength(2);
+        }
+        else if(card.getCardID()==25){
+            player.takeStaticDamage(6);
+            deck.drawRandom();
+            deck.drawRandom();
+            deck.drawRandom();
+            deck.gainEnergy(2);
+        }
+        else if(card.getCardID()==26){
+            deck.gainEnergy(2);
+        }
+        else if(card.getCardID()==27){
+            player.takeStaticDamage(3);
+            deck.gainEnergy(2);
+        }
+        else if(card.getCardID()==27){
+            player.takeStaticDamage(3);
+            deck.gainEnergy(2);
+        }
+        else if(card.getCardID()==29){
+            player.increaseStrength(player.getStrength());
+        }
+        else if(card.getCardID()==30){
+            player.block(player.getBlock());
+        }
+        else if(card.getCardID()==35){
+            deck.addIntoDiscardPile(new Card(36));
+        }
+        else if(card.getCardID()==38){
+            deck.addIntoHand(new Card(39));
+            deck.addIntoHand(new Card(39));
+        }
 
         if (!card.getTarget() &&!card.getAOE()){
-            for (int i=0; i<attackNum; i++){
+            for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 int ran = (int)(Math.random()*enemies.size());
                 ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
             }
             deck.playedCard(card);
-            
+
         }
         else if (card.getAOE()){
-            for (int i=0; i<attackNum; i++){
+            for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){
+                    int previousHealth=((Entity)enemies.get(x)).getHealth();
                     ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
+                    int newHealth=((Entity)enemies.get(x)).getHealth();
+                    if(card.getCardID()==19){
+                        player.heal(previousHealth-newHealth); // sorta bad way to do it but it works
+                    }
                 }
             }
             deck.playedCard(card);
         }
 
-        
-
     }
-
     public Player getPlayer(){
         return player; 
     }
