@@ -57,6 +57,10 @@ public class Entity extends Actor
                 else if (card.getCardID()==17){
                     this.increaseStrength(-2); 
                 }
+                else if (card.getCardID()==33 && vulnerable>0){
+                    deck.drawRandom();
+                    deck.gainEnergy(1);
+                }
                 
                 if (card.getTarget()){
                     for (int i=0; i<attackNum; i++){

@@ -205,6 +205,10 @@ public class Card extends Actor
             ethereal=true;
             target=false;
             break;
+            case 33: 
+            image = new GreenfootImage("Dropkick.png");
+            setStats(0,5,1);
+            break;
         }
         image.scale(150,194);
         setImage(image); 

@@ -52,20 +52,22 @@ public class Deck extends Actor
     } 
 
     public void discardHand(){ 
-        for (int i=0; i<hand.size(); i++){
-            Card card = (Card)hand.get(i);
-            if (((Card)hand.get(i)).getEthereal()){
-                hand.remove(card);
-                exhaustCard(card); 
+        int cardAmount=hand.size();
+        for (int i=0; i<cardAmount; i++){
+            Card card = (Card)hand.get(0);
+            if (card.getEthereal()){
+                exhaustCard(card);
             }
             else{
-                getWorld().removeObject(card); // clears card off world so it can be reused
-                card.deselect();
-                setSelected(null);
                 discardPile.add(card);
+                getWorld().removeObject(card);// clears card off world so it can be reused
             }
+            hand.remove(card); 
+            card.deselect();
+            setSelected(null);
+
         }
-        hand.clear(); 
+
         energy=maxEnergy; 
     }
 
