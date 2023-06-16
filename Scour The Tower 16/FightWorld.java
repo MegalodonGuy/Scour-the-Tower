@@ -62,6 +62,10 @@ public class FightWorld extends World
         initialDeck.add(new Card(26));
         initialDeck.add(new Card(27));
         initialDeck.add(new Card(28));
+        initialDeck.add(new Card(29));
+        initialDeck.add(new Card(30));
+        initialDeck.add(new Card(31));
+        initialDeck.add(new Card(32));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -126,6 +130,16 @@ public class FightWorld extends World
         else if(card.getCardID()==27){
             player.takeStaticDamage(3);
             deck.gainEnergy(2);
+        }
+        else if(card.getCardID()==27){
+            player.takeStaticDamage(3);
+            deck.gainEnergy(2);
+        }
+        else if(card.getCardID()==29){
+            player.increaseStrength(player.getStrength());
+        }
+        else if(card.getCardID()==30){
+            player.block(player.getBlock());
         }
 
         if (!card.getTarget() &&!card.getAOE()){

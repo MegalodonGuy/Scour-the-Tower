@@ -22,8 +22,9 @@ public class Card extends Actor
     private boolean target; // is it a non target or target card? - assumes random target for attacking
     private boolean aoe; // does it effect every enemy? (or every enemy + yourself)
     private int attackNum; // amount of attacks(multi attacks)
-    private boolean exhaust; 
+    private boolean exhaust; // goes to exhaust pile instead of discard pile
     private boolean power;
+    private boolean ethereal; // if card isn't used, exhaust
     GreenfootImage image; 
     public Card(int CardID){
         this.CardID = CardID;
@@ -33,6 +34,7 @@ public class Card extends Actor
         target=true;
         exhaust= false;
         power=false;
+        ethereal=false;
         switch (CardID){
             case 1: 
             image = new GreenfootImage("Strike.png"); 
@@ -181,6 +183,28 @@ public class Card extends Actor
             setStats(0,5,1);
             target=false;
             break;
+            case 29: 
+            image = new GreenfootImage("LimitBreak.png");
+            setStats(0,0,1);
+            target=false;
+            exhaust=true;
+            break;
+            case 30: 
+            image = new GreenfootImage("Entrench.png");
+            setStats(0,0,2);
+            target=false;
+            break;
+            case 31: 
+            image = new GreenfootImage("Carnage.png");
+            setStats(20,0,2);
+            ethereal=true;
+            break;
+            case 32: 
+            image = new GreenfootImage("GhostlyArmor.png");
+            setStats(0,10,1);
+            ethereal=true;
+            target=false;
+            break;
         }
         image.scale(150,194);
         setImage(image); 
@@ -265,6 +289,9 @@ public class Card extends Actor
     }
     public boolean getExhaust(){
         return exhaust; 
+    }
+    public boolean getEthereal(){
+        return ethereal; 
     }
     public boolean getPower(){
         return power; 

@@ -1,5 +1,5 @@
 #Greenfoot project file
-class.Card.image=Bloodletting.png
+class.Card.image=GhostlyArmor.png
 class.Deck.image=1.png
 class.EndTurnButton.image=End.png
 class.FightWorld.image=ActOne.png
@@ -82,8 +82,8 @@ dependency9.to=FightWorld
 dependency9.type=UsesDependency
 editor.fx.0.height=739
 editor.fx.0.width=816
-editor.fx.0.x=552
-editor.fx.0.y=100
+editor.fx.0.x=793
+editor.fx.0.y=115
 height=1056
 package.numDependencies=25
 package.numTargets=10

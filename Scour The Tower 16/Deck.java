@@ -53,22 +53,29 @@ public class Deck extends Actor
 
     public void discardHand(){ 
         for (int i=0; i<hand.size(); i++){
-            discardPile.add(hand.get(i));
             Card card = (Card)hand.get(i);
-            getWorld().removeObject(card); // clears card off world so it can be reused
-            card.deselect();
-            setSelected(null);
+            if (((Card)hand.get(i)).getEthereal()){
+                hand.remove(card);
+                exhaustCard(card); 
+            }
+            else{
+                getWorld().removeObject(card); // clears card off world so it can be reused
+                card.deselect();
+                setSelected(null);
+                discardPile.add(card);
+            }
         }
         hand.clear(); 
         energy=maxEnergy; 
     }
-    
+
     public void exhaustHand(){
         for (int x=0; x<hand.size(); x++){
             exhaustCard((Card)hand.get(x));
         }
         hand.clear();
     }
+
     public void exhaustCard(Card card){
         if (card.getCardID()==28){
             energy+=2;
@@ -77,7 +84,7 @@ public class Deck extends Actor
         getWorld().removeObject(card);
     }
 
-        public void discardCard(Object card){
+    public void discardCard(Object card){
         Card usedCard = (Card)card;
         if (usedCard.getExhaust()){
             exhaustCard(usedCard); 
@@ -118,6 +125,7 @@ public class Deck extends Actor
     public int getMaxEnergy(){
         return maxEnergy; 
     }
+
     public void gainEnergy(int energy){
         this.energy+=energy;
         //can go above max just like in game
