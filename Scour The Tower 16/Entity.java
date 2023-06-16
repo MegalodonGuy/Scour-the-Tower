@@ -19,7 +19,12 @@ public class Entity extends Actor
     protected int dex=0; // added block on every block 
 
     private FightWorld world;
-
+    
+    //powers
+    private boolean barricade=false;
+    private boolean demonForm=false;
+    
+    
     public Entity(int maxHealth, int health,Deck deck, FightWorld world){
         this.maxHealth=maxHealth;
         this.health=health;
@@ -185,12 +190,23 @@ public class Entity extends Actor
     }
 
     public void turnPassed(){
-        this.block=0;
+        if (!barricade){
+            this.block=0;
+        }
         if (vulnerable>0){
             vulnerable--; 
         }
         if (weakened>0){
             weakened--; 
         } 
+        if (demonForm){
+            strength+=2;
+        }
+    }
+    public void barricade(){
+        barricade=true;
+    }
+    public void demonForm(){
+        demonForm=true;
     }
 }

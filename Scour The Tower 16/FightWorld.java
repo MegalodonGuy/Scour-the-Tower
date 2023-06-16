@@ -75,6 +75,8 @@ public class FightWorld extends World
         initialDeck.add(new Card(41));
         initialDeck.add(new Card(42));
         initialDeck.add(new Card(44));
+        initialDeck.add(new Card(45));
+        initialDeck.add(new Card(46));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -167,6 +169,12 @@ public class FightWorld extends World
             deck.drawRandom();
             deck.drawRandom();
             deck.battleTrance();
+        }
+        else if(card.getCardID()==45){
+            player.barricade();
+        }
+        else if(card.getCardID()==46){
+            player.demonForm();
         }
         
 
