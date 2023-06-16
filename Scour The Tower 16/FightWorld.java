@@ -72,6 +72,11 @@ public class FightWorld extends World
         initialDeck.add(new Card(37));
         initialDeck.add(new Card(38));
         initialDeck.add(new Card(40));
+        initialDeck.add(new Card(41));
+        initialDeck.add(new Card(42));
+        initialDeck.add(new Card(44));
+        initialDeck.add(new Card(45));
+        initialDeck.add(new Card(46));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -87,6 +92,7 @@ public class FightWorld extends World
         for (int x =0; x<enemies.size(); x++){
             addObject((Entity)enemies.get(x), 800-250*x,400);
         }
+        Util.updateCardVisuals(hand, deck, this);
     }
 
     public void act(){
@@ -154,6 +160,23 @@ public class FightWorld extends World
             deck.addIntoHand(new Card(39));
             deck.addIntoHand(new Card(39));
         }
+        else if(card.getCardID()==41){
+            int ran = (int)(Math.random()*deck.getHand().size());
+            deck.exhaustCard((Card)deck.getHand().get(ran));
+        }
+        else if(card.getCardID()==44){
+            deck.drawRandom();
+            deck.drawRandom();
+            deck.drawRandom();
+            deck.battleTrance();
+        }
+        else if(card.getCardID()==45){
+            player.barricade();
+        }
+        else if(card.getCardID()==46){
+            player.demonForm();
+        }
+        
 
         if (!card.getTarget() &&!card.getAOE()){
             for (int i=0; i<card.getAttackNum(); i++){

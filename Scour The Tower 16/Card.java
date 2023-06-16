@@ -239,6 +239,35 @@ public class Card extends Actor
             image = new GreenfootImage("WildStrike.png");
             setStats(12,0,1);
             break;
+            case 41: 
+            image = new GreenfootImage("TrueGrit.png");
+            setStats(0,7,1);
+            target=false;
+            break;
+            case 42: 
+            image = new GreenfootImage("RecklessCharge.png");
+            setStats(7,0,0);
+            break;
+            case 43: 
+            image = new GreenfootImage("Dazed.png");
+            setStats(0,0,999999999);
+            ethereal=true;
+            break;
+            case 44: 
+            image = new GreenfootImage("BattleTrance.png");
+            setStats(0,0,0);
+            target=false;
+            break;
+            case 45: 
+            image = new GreenfootImage("Barricade.png");
+            setStats(0,0,3);
+            target=false;
+            break;
+            case 46: 
+            image = new GreenfootImage("DemonForm.png");
+            setStats(0,0,3);
+            target=false;
+            break;
         }
         image.scale(150,194);
         setImage(image); 

@@ -17,6 +17,8 @@ public class Deck extends Actor
     private static Object selectedCard; // card selected to be used, one at a time
     private int energy; // total energy, will deplete from card cost (mana)
     private int maxEnergy;
+    
+    private boolean battleTrance=false;
     public Deck(ArrayList<Object> deck){
         this.deck=Util.cloneContents(deck); 
         drawPile=Util.cloneContents(deck); 
@@ -35,6 +37,9 @@ public class Deck extends Actor
     } 
 
     public void drawRandom(){
+        if (battleTrance){
+            return;
+        }
         if (drawPile.size()==0){
             drawPile=Util.cloneContents(discardPile); 
             discardPile.clear(); 
@@ -46,6 +51,7 @@ public class Deck extends Actor
 
     public void deal(){
         discardHand(); 
+        battleTrance=false;
         for (int i=0; i<5; i++){
             drawRandom(); 
         }
@@ -87,6 +93,7 @@ public class Deck extends Actor
             energy+=2;
         }
         exhaustPile.add(card);
+        hand.remove(card); 
         getWorld().removeObject(card);
     }
 
@@ -140,7 +147,9 @@ public class Deck extends Actor
     public int getAvailableEnergy(){
         return energy; 
     }
-
+    public void battleTrance(){
+        battleTrance=true;
+    }
 
     public int getMaxEnergy(){
         return maxEnergy; 
