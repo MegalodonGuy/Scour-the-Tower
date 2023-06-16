@@ -140,7 +140,7 @@ public class Card extends Actor
             break;
             case 22: 
             image = new GreenfootImage("Intimidate.png");
-            setStats(0,0,1);
+            setStats(0,0,0);
             weaken=1;
             aoe=true;
             exhaust=true;
@@ -164,6 +164,22 @@ public class Card extends Actor
             setStats(0,0,0);
             target=false;
             exhaust=true;
+            break;
+            case 26: 
+            image = new GreenfootImage("SeeingRed.png");
+            setStats(0,0,1);
+            target=false;
+            exhaust=true;
+            break;
+            case 27: 
+            image = new GreenfootImage("Bloodletting.png");
+            setStats(0,0,0);
+            target=false;
+            break;
+            case 28: 
+            image = new GreenfootImage("Sentinel.png");
+            setStats(0,5,1);
+            target=false;
             break;
         }
         image.scale(150,194);

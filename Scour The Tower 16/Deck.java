@@ -65,25 +65,31 @@ public class Deck extends Actor
     
     public void exhaustHand(){
         for (int x=0; x<hand.size(); x++){
-            exhaustPile.add(hand.get(x));
-            getWorld().removeObject((Card)(hand.get(x)));
+            exhaustCard((Card)hand.get(x));
         }
         hand.clear();
     }
+    public void exhaustCard(Card card){
+        if (card.getCardID()==28){
+            energy+=2;
+        }
+        exhaustPile.add(card);
+        getWorld().removeObject(card);
+    }
 
-    public void discardCard(Object card){
+        public void discardCard(Object card){
         Card usedCard = (Card)card;
         if (usedCard.getExhaust()){
-            exhaustPile.add(card); 
+            exhaustCard(usedCard); 
         }
         else if(usedCard.getPower()){
             //dont put it anywhere, power is used
         }
         else{
-            discardPile.add(card); 
+            discardPile.add(usedCard); 
         }
         getWorld().removeObject(usedCard);// clears card off world so it can be reused
-        hand.remove(card); 
+        hand.remove(usedCard); 
         usedCard.deselect();  
         setSelected(null);
     }
