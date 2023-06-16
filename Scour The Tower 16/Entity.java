@@ -114,4 +114,7 @@ public class Entity extends Actor
         weakened--; 
       } 
     }
+    public int getHealth(){
+        return health;
+    }
 }
