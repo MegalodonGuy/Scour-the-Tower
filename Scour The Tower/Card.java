@@ -268,6 +268,11 @@ public class Card extends Actor
                 setStats(0,0,3);
                 target=false;
                 break;
+            case 47: 
+                image = new GreenfootImage("Metallicize.png");
+                setStats(0,0,1);
+                target=false;
+                break;
         }
         image.scale(150,194);
         setImage(image); 
@@ -351,7 +356,7 @@ public class Card extends Actor
     public int getWeaken(){
         return weaken; 
     }
-    
+
     public boolean getUpgraded(){
         return upgraded;
     }
