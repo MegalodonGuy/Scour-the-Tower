@@ -10,6 +10,8 @@ public class Enemy extends Entity
 {
     Player player;
     Deck deck;
+    protected int ran; // used for attack rolls
+    protected String nextMove;
     public Enemy(int maxHealth, int health,Deck deck, FightWorld world,Player player){
         super(maxHealth, health, deck, world);
         this.player=player; 
@@ -36,9 +38,11 @@ public class Enemy extends Entity
         if (card.getCardID()==8){
             damage=player.getBlock();
         }
-        
- 
         super.hit(damage, vulnerable, weaken, attackerWeakend);
-
     }
+    
+    public String getNextMove(){
+        return nextMove;
+    }
+    
 }

@@ -82,7 +82,7 @@ public class FightWorld extends World
         player = new Player(80,80,deck,this);
 
         enemies.add(new JawWorm(42,42,deck,this,player));
-        enemies.add(new JawWorm(42,42,deck,this,player));
+        enemies.add(new Cultist(42,42,deck,this,player));
 
         etb = new EndTurnButton(deck); 
 
@@ -90,7 +90,7 @@ public class FightWorld extends World
         addObject(etb,900,700);
         addObject(player, 200,400);
         for (int x =0; x<enemies.size(); x++){
-            addObject((Entity)enemies.get(x), 800-250*x,400);
+            addObject((Entity)enemies.get(x), 800-250*x,370);
         }
         Util.updateCardVisuals(hand, deck, this);
     }

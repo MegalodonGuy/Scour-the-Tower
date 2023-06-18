@@ -9,10 +9,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Entity
 {
     FightWorld world;
-    
+    GreenfootImage image;
     public Player(int maxHealth, int health,Deck deck, FightWorld world){
         super(maxHealth, health, deck, world);
         this.world=world; 
+        image = new GreenfootImage("Ironclad.png");
+        image.scale(300,200);
+        setImage(image);
     }
 
     /**
@@ -21,6 +24,10 @@ public class Player extends Entity
      */
     public void act()
     {
+        if (!spawned){
+            world.addObject(new Bar(this), getX()+40, getY()+105);
+            spawned=true;
+        }
         if (Greenfoot.mouseClicked(this)){
             world.cardUsedOnWorld(); 
         } 

@@ -12,15 +12,17 @@ public class Bar extends Actor
      * Act - do whatever the HealthBar wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
+
     public int barMax;
     public int hP;
     public int barLength = 100;
     public int barHeight = 20;
     public int sizeForHP;
-    public Bar(int startHP, int maxHealth){
-        barMax = maxHealth;
-        int hP = startHP;
+    Entity entity;
+    public Bar(Entity entity){
+        this.entity = entity;
+        barMax = entity.getMaxHealth();
+        int hP = entity.getHealth();
         sizeForHP = (int)barLength/barMax;
         setImage(new GreenfootImage(barLength + 2, barHeight + 2));
         GreenfootImage myImage = getImage();
@@ -29,14 +31,16 @@ public class Bar extends Actor
         if(hP/barMax > 0.3){
             myImage.setColor(Color.GREEN);
         } else {
-        myImage.setColor(Color.RED);
+            myImage.setColor(Color.RED);
         }
         myImage.fillRect(1, 1, hP*sizeForHP, barHeight);
     }
+
     public void act()
     {
-        setBar(this.hP);
+        setBar(entity.getHealth());
     }
+
     public void setBar(int currentHP){
         sizeForHP = (int)barLength/barMax;
         setImage(new GreenfootImage(barLength + 2, barHeight + 2));
@@ -50,9 +54,11 @@ public class Bar extends Actor
         }
         myImage.fillRect(1, 1, currentHP*sizeForHP, barHeight);
     }
+
     public void loseHP(){
         hP--;
     }
+
     public void gainHP(){
         hP++;
     }
