@@ -72,25 +72,25 @@ public class Hexaghost extends Enemy
     }
 
     protected void move1(){ 
-        System.out.println("Activate");
+        //System.out.println("Activate");
     }
 
     protected void move2(){
         player.hit(6+strength,0,0,weakened);
         deck.addIntoDiscardPile(new Card(36));
-        System.out.println("Sear");
+        //System.out.println("Sear");
     }
 
     protected void move3(){
         player.hit(5+strength,0,0,weakened);
         player.hit(5+strength,0,0,weakened);
-        System.out.println("Tackle");
+        //System.out.println("Tackle");
     }
 
     protected void move4(){
         increaseStrength(2);  
         block(12);
-        System.out.println("Inflame");
+        //System.out.println("Inflame");
     }
 
     protected void move5(){
@@ -99,12 +99,13 @@ public class Hexaghost extends Enemy
         deck.addIntoDiscardPile(new Card(36));
         deck.addIntoDiscardPile(new Card(36));
         deck.addIntoDiscardPile(new Card(36));
-        System.out.println("Inferno");
+        deck.upgradeAllBurns();
+        //System.out.println("Inferno");
     }
 
     protected void move6(){
         player.hit(((player.getHealth()/12)+1)*6,0,0,weakened);
-        System.out.println("Divider");
+        //System.out.println("Divider");
     }
 
     public void nextMove(){
