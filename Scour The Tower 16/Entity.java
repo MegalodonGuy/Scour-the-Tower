@@ -209,4 +209,7 @@ public class Entity extends Actor
     public void demonForm(){
         demonForm=true;
     }
+    public int getHealth(){
+        return health;
+    }
 }
