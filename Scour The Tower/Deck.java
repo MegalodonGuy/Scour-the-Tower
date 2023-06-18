@@ -84,9 +84,9 @@ public class Deck extends Actor
         energy=maxEnergy; 
     }
 
-    public void exhaustHand(){
+    public void exhaustHand(Card card){
         while(hand.size()>0){
-            exhaustCard((Card)hand.get(0));
+              exhaustCard((Card)hand.get(0));
         }
         setSelected(null);
     }

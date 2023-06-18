@@ -60,7 +60,6 @@ public class Entity extends Actor
                 //cards with special effects
                 if (card.getCardID()==9){
                     attackNum=deck.getHand().size()-1;
-                    deck.exhaustHand();
                 }
                 else if (card.getCardID()==12){
                     deck.drawRandom();
@@ -102,6 +101,10 @@ public class Entity extends Actor
                 }
                 else{
                     world.cardUsedOnWorld(); 
+                }
+                
+                if (card.getCardID()==9){
+                    deck.exhaustHand(card);
                 }
             }
         } 
