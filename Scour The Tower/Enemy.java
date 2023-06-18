@@ -30,7 +30,7 @@ public class Enemy extends Entity
     }
 
     public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
-
+        
         if (Deck.getSelectedCard()==null){
             return;
         }

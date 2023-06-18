@@ -195,12 +195,17 @@ public class FightWorld extends World
         else if(card.getCardID()==47){
             player.metallicize(3);
         }
-
+        
+        
+        int tempStrength=player.getStrength();
+        if (card.getDamage()==0){ // so cards that dont attack aren't effected
+            tempStrength=0;
+        }
         if (!card.getTarget() &&!card.getAOE()){
             for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 int ran = (int)(Math.random()*enemies.size());
-                ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
+                ((Entity)enemies.get(ran)).hit(card.getDamage()+tempStrength,card.getVulnerable(),card.getWeaken(),player.getWeaken());
             }
             deck.playedCard(card);
 
@@ -210,7 +215,7 @@ public class FightWorld extends World
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){
                     int previousHealth=((Entity)enemies.get(x)).getHealth();
-                    ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
+                    ((Entity)enemies.get(x)).hit(card.getDamage()+tempStrength,card.getVulnerable(),card.getWeaken(),player.getWeaken());
                     int newHealth=((Entity)enemies.get(x)).getHealth();
                     if(card.getCardID()==19){
                         player.heal(previousHealth-newHealth); // sorta bad way to do it but it works
