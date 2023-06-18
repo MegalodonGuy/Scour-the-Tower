@@ -18,11 +18,12 @@ public class Bar extends Actor
     public int barLength = 100;
     public int barHeight = 20;
     public int sizeForHP;
+    public int hpPercentage=100;
     Entity entity;
     public Bar(Entity entity){
         this.entity = entity;
-        barMax = entity.getMaxHealth();
-        int hP = entity.getHealth();
+        barMax = 100;
+        hP = entity.getHealth();
         sizeForHP = (int)barLength/barMax;
         setImage(new GreenfootImage(barLength + 2, barHeight + 2));
         GreenfootImage myImage = getImage();
@@ -38,7 +39,8 @@ public class Bar extends Actor
 
     public void act()
     {
-        setBar(entity.getHealth());
+        hpPercentage=100*entity.getHealth()/entity.getMaxHealth();
+        setBar(hpPercentage);
     }
 
     public void setBar(int currentHP){

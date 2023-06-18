@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Entity here.
  * 
- * @author (your name) 
+ * @author (Ben H.) 
  * @version (a version number or a date)
  */
 public class Entity extends Actor
@@ -19,22 +19,23 @@ public class Entity extends Actor
     protected int dex=0; // added block on every block 
 
     private FightWorld world;
-    
+    protected Bar bar;
     //powers
     private boolean barricade=false;
     private int demonForm=0;
-    
+
     //enemy effects
     private int incantation=0;
-    
+
     protected boolean spawned = false;
-    
+
     public Entity(int maxHealth, int health,Deck deck, FightWorld world){
         this.maxHealth=maxHealth;
         this.health=health;
         this.deck=deck;
         dead=false;
         this.world =world; 
+        bar = new Bar(this);
     }
 
     /**
@@ -44,7 +45,7 @@ public class Entity extends Actor
     public void act()
     {
         if (!spawned){
-            world.addObject(new Bar(this), getX(), getY()+125);
+            world.addObject(bar, getX(), getY()+125);
             spawned=true;
         }
         if (Greenfoot.mouseClicked(this)){
@@ -129,12 +130,10 @@ public class Entity extends Actor
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
         if (health<=0 && !dead){
-            getWorld().removeObject(this); 
-            dead=true; 
+            die(); 
         }
 
     }
-    
 
     public void heal (int health){ 
         this.health+=health;
@@ -146,8 +145,7 @@ public class Entity extends Actor
     public void takeStaticDamage(int dmg){
         this.health-=dmg;
         if (health<=0 && !dead){
-            getWorld().removeObject(this); 
-            dead=true; 
+            die();
         }
     }
 
@@ -190,6 +188,12 @@ public class Entity extends Actor
         return this.dead;
     }
 
+    public void die(){
+        getWorld().removeObject(this);
+        world.removeObject(this.bar);
+        dead=true; 
+    }
+
     public int getBlock(){
         return block;
     }
@@ -197,6 +201,7 @@ public class Entity extends Actor
     public int getHealth(){
         return health;
     }
+
     public int getMaxHealth(){
         return maxHealth;
     }
@@ -211,18 +216,20 @@ public class Entity extends Actor
         if (weakened>0){
             weakened--; 
         } 
-    
+
         strength+=2*demonForm;
         strength+=incantation;
     }
     //powers/enemy effects
-    
+
     public void barricade(){
         barricade=true;
     }
+
     public void demonForm(){
         demonForm+=1;
     }
+
     public void incantation(int amount){
         incantation+=amount;
     }

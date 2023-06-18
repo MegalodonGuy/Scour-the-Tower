@@ -61,8 +61,11 @@ public class Deck extends Actor
         int cardAmount=hand.size();
         for (int i=0; i<cardAmount; i++){
             Card card = (Card)hand.get(0);
-            if (card.getCardID()==36){
+            if (card.getCardID()==36 && !card.getUpgraded()){
                 ((FightWorld)getWorld()).getPlayer().hit(2,0,0,0); // burn hits block
+            }
+            else if (card.getCardID()==36 && card.getUpgraded()){
+                ((FightWorld)getWorld()).getPlayer().hit(4,0,0,0); // burn hits block
             }
             
             if (card.getEthereal()){
@@ -82,10 +85,10 @@ public class Deck extends Actor
     }
 
     public void exhaustHand(){
-        for (int x=0; x<hand.size(); x++){
-            exhaustCard((Card)hand.get(x));
+        while(hand.size()>0){
+            exhaustCard((Card)hand.get(0));
         }
-        hand.clear();
+        setSelected(null);
     }
 
     public void exhaustCard(Card card){
@@ -158,5 +161,28 @@ public class Deck extends Actor
     public void gainEnergy(int energy){
         this.energy+=energy;
         //can go above max just like in game
+    }
+    
+    public void upgradeAllBurns(){ // for hexaghost
+        for (int x=0; x<hand.size(); x++){
+            if (((Card)hand.get(x)).getCardID()==36){
+                ((Card)hand.get(x)).upgrade();
+            }
+        }
+        for (int x=0; x<discardPile.size(); x++){
+            if (((Card)discardPile.get(x)).getCardID()==36){
+                ((Card)discardPile.get(x)).upgrade();
+            }
+        }
+        for (int x=0; x<drawPile.size(); x++){
+            if (((Card)drawPile.get(x)).getCardID()==36){
+                ((Card)drawPile.get(x)).upgrade();
+            }
+        }
+        for (int x=0; x<exhaustPile.size(); x++){
+            if (((Card)exhaustPile.get(x)).getCardID()==36){
+                ((Card)exhaustPile.get(x)).upgrade();
+            }
+        }
     }
 }
