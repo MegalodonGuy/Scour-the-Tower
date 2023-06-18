@@ -216,4 +216,7 @@ public class Entity extends Actor
     public void incantation(int amount){
         incantation+=amount;
     }
+    public int getHealth(){
+        return health;
+    }
 }
