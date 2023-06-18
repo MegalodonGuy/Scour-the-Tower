@@ -82,10 +82,19 @@ public class FightWorld extends World
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
 
-        //enemies.add(new JawWorm(42,42,deck,this,player));
-        //enemies.add(new Cultist(42,42,deck,this,player));
-        //enemies.add(new Hexaghost(250,250,deck,this,player));
-        enemies.add(new Lagavulin(110,110,deck,this,player));
+        int ran= ((int)(Math.random()*100))+1;
+        if (ran<25){
+            enemies.add(new JawWorm(42,42,deck,this,player));
+        }
+        else if (ran>24 &&ran<50){
+            enemies.add(new Cultist(42,42,deck,this,player));
+        }
+        else if(ran>49 &&ran<75){
+            enemies.add(new Hexaghost(250,250,deck,this,player));
+        }
+        else if (ran>74){
+            enemies.add(new Lagavulin(110,110,deck,this,player));
+        }
 
         etb = new EndTurnButton(deck); 
 
@@ -115,6 +124,10 @@ public class FightWorld extends World
         if (Greenfoot.mouseClicked(this) && Deck.getSelectedCard()!=null){
             // if card used on enemy
             cardUsedOnWorld(); 
+        }
+        
+        if (enemies.size()==0){
+            Greenfoot.setWorld(new FightWorld());
         }
     }
 
@@ -182,7 +195,6 @@ public class FightWorld extends World
         else if(card.getCardID()==47){
             player.metallicize(3);
         }
-        
 
         if (!card.getTarget() &&!card.getAOE()){
             for (int i=0; i<card.getAttackNum(); i++){
@@ -209,6 +221,7 @@ public class FightWorld extends World
         }
 
     }
+
     public Player getPlayer(){
         return player; 
     }
