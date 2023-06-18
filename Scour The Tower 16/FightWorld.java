@@ -14,6 +14,8 @@ public class FightWorld extends World
     private Deck deck;
     private Player player;
     private EndTurnButton etb;  
+    private Energy energy;
+    public static Label energyLabel;
 
     GreenfootImage image; 
     /**
@@ -80,6 +82,8 @@ public class FightWorld extends World
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
+        energy = new Energy(3, 3, deck);
+        energyLabel = new Label("3/3");
 
         enemies.add(new JawWorm(42,42,deck,this,player));
         enemies.add(new JawWorm(42,42,deck,this,player));
@@ -89,6 +93,8 @@ public class FightWorld extends World
         addObject(deck,0,0);
         addObject(etb,900,700);
         addObject(player, 200,400);
+        addObject(energy, 75,700);
+        addObject(energyLabel, 74,700);
         for (int x =0; x<enemies.size(); x++){
             addObject((Entity)enemies.get(x), 800-250*x,400);
         }

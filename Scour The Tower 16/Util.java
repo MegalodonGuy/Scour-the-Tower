@@ -44,7 +44,6 @@ public class Util
             card.setLocation(initialCardSpacing+cardSpacing*i+1,ySpacing);
         }
 
-        world.showText("Energy: "+deck.getAvailableEnergy()+"/"+deck.getMaxEnergy(),75,700);
     }
 
     public static ArrayList<Object> cloneContents(ArrayList<Object> cloner){
