@@ -20,6 +20,7 @@ public class Lagavulin extends Enemy
         setImage(image);
         nextMove="Sleep";
         ran=0;
+        metallicize(8);
     } 
 
     @Override
@@ -81,6 +82,9 @@ public class Lagavulin extends Enemy
     @Override
     public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
         super.hit(damage,vulnerable,weaken,attackerWeakend);
+        if (damage<=8){
+            return;
+        }
         if (asleep){
             patternNum=0;
             asleep=false;

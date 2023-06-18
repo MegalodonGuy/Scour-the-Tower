@@ -23,6 +23,7 @@ public class Entity extends Actor
     //powers
     private boolean barricade=false;
     private int demonForm=0;
+    private int metallicize=0;
 
     //enemy effects
     private int incantation=0;
@@ -222,6 +223,7 @@ public class Entity extends Actor
 
         strength+=2*demonForm;
         strength+=incantation;
+        block+=metallicize;
     }
     //powers/enemy effects
 
@@ -235,5 +237,10 @@ public class Entity extends Actor
 
     public void incantation(int amount){
         incantation+=amount;
+    }
+    
+    public void metallicize(int amount){
+        metallicize+=amount;
+        block(amount);
     }
 }

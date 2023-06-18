@@ -77,6 +77,7 @@ public class FightWorld extends World
         initialDeck.add(new Card(44));
         initialDeck.add(new Card(45));
         initialDeck.add(new Card(46));
+        initialDeck.add(new Card(47));
 
         deck = new Deck(initialDeck);
         player = new Player(80,80,deck,this);
@@ -177,6 +178,9 @@ public class FightWorld extends World
         }
         else if(card.getCardID()==46){
             player.demonForm();
+        }
+        else if(card.getCardID()==47){
+            player.metallicize(3);
         }
         
 
