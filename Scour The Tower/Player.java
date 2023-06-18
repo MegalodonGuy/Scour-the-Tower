@@ -25,7 +25,7 @@ public class Player extends Entity
     public void act()
     {
         if (!spawned){
-            world.addObject(new Bar(this), getX()+40, getY()+105);
+            world.addObject(bar, getX()+40, getY()+105);
             spawned=true;
         }
         if (Greenfoot.mouseClicked(this)){

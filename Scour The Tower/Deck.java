@@ -82,10 +82,10 @@ public class Deck extends Actor
     }
 
     public void exhaustHand(){
-        for (int x=0; x<hand.size(); x++){
-            exhaustCard((Card)hand.get(x));
+        while(hand.size()>0){
+            exhaustCard((Card)hand.get(0));
         }
-        hand.clear();
+        setSelected(null);
     }
 
     public void exhaustCard(Card card){

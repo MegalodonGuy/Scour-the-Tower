@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Cultist here.
  * 
- * @author (your name) 
+ * @author (Ben H) 
  * @version (a version number or a date)
  */
 public class Cultist extends Enemy

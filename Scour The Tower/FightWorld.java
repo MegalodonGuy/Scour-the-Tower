@@ -29,7 +29,7 @@ public class FightWorld extends World
 
         image.scale(1000,800);
         getBackground().drawImage(image,0,0);
-
+        Deck.setSelected(null);
         initialDeck.add(new Card(1)); 
         initialDeck.add(new Card(1));  
         initialDeck.add(new Card(2)); 
@@ -82,7 +82,8 @@ public class FightWorld extends World
         player = new Player(80,80,deck,this);
 
         enemies.add(new JawWorm(42,42,deck,this,player));
-        enemies.add(new Cultist(42,42,deck,this,player));
+        //enemies.add(new Cultist(42,42,deck,this,player));
+        //enemies.add(new Hexaghost(250,250,deck,this,player));
 
         etb = new EndTurnButton(deck); 
 
