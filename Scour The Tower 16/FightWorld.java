@@ -13,7 +13,7 @@ public class FightWorld extends World
     private ArrayList <Object> enemies = new ArrayList<Object>();  
     private Deck deck;
     private Player player;
-    private EndTurnButton etb;  
+    private EndTurnButton etb;
     
     GreenfootImage image; 
     /**
@@ -54,6 +54,7 @@ public class FightWorld extends World
         addObject(deck,0,0);
         addObject(etb,900,700);
         addObject(player, 200,400);
+        
             for (int x =0; x<enemies.size(); x++){
         addObject((Entity)enemies.get(x), 800-250*x,400);
         }

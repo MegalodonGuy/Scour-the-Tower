@@ -14,25 +14,46 @@ public class Bar extends Actor
      */
     
     public int barMax;
+    public int hP;
     public int barLength = 100;
     public int barHeight = 20;
     public int sizeForHP;
-    public void act()
-    {
-        setBar(10, 10);
-    }
-    public void setBar(int HP, int max){
-        barMax = max;
+    public Bar(int startHP, int maxHealth){
+        barMax = maxHealth;
+        int hP = startHP;
         sizeForHP = (int)barLength/barMax;
         setImage(new GreenfootImage(barLength + 2, barHeight + 2));
         GreenfootImage myImage = getImage();
         myImage.setColor(Color.WHITE);
         myImage.drawRect(0, 0, barLength + 1, barHeight + 1);
-        if(HP/max >= 0.3){
+        if(hP/barMax > 0.3){
             myImage.setColor(Color.GREEN);
         } else {
         myImage.setColor(Color.RED);
         }
-        myImage.fillRect(1, 1, barLength, barHeight);
+        myImage.fillRect(1, 1, hP*sizeForHP, barHeight);
+    }
+    public void act()
+    {
+        setBar(this.hP);
+    }
+    public void setBar(int currentHP){
+        sizeForHP = (int)barLength/barMax;
+        setImage(new GreenfootImage(barLength + 2, barHeight + 2));
+        GreenfootImage myImage = getImage();
+        myImage.setColor(Color.WHITE);
+        myImage.drawRect(0, 0, barLength + 1, barHeight + 1);
+        if(currentHP/barMax > 0.3){
+            myImage.setColor(Color.GREEN);
+        } else {
+            myImage.setColor(Color.RED);
+        }
+        myImage.fillRect(1, 1, currentHP*sizeForHP, barHeight);
+    }
+    public void loseHP(){
+        hP--;
+    }
+    public void gainHP(){
+        hP++;
     }
 }
