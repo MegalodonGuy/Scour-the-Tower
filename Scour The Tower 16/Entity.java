@@ -22,8 +22,10 @@ public class Entity extends Actor
     
     //powers
     private boolean barricade=false;
-    private boolean demonForm=false;
+    private int demonForm=0;
     
+    //enemy effects
+    private int incantation=0;
     
     public Entity(int maxHealth, int health,Deck deck, FightWorld world){
         this.maxHealth=maxHealth;
@@ -199,14 +201,19 @@ public class Entity extends Actor
         if (weakened>0){
             weakened--; 
         } 
-        if (demonForm){
-            strength+=2;
-        }
+    
+        strength+=2*demonForm;
+        strength+=incantation;
     }
+    //powers/enemy effects
+    
     public void barricade(){
         barricade=true;
     }
     public void demonForm(){
-        demonForm=true;
+        demonForm+=1;
+    }
+    public void incantation(int amount){
+        incantation+=amount;
     }
 }

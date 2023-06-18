@@ -82,7 +82,7 @@ public class FightWorld extends World
         player = new Player(80,80,deck,this);
 
         enemies.add(new JawWorm(42,42,deck,this,player));
-        enemies.add(new JawWorm(42,42,deck,this,player));
+        enemies.add(new Cultist(42,42,deck,this,player));
 
         etb = new EndTurnButton(deck); 
 
