@@ -83,7 +83,8 @@ public class FightWorld extends World
 
         //enemies.add(new JawWorm(42,42,deck,this,player));
         //enemies.add(new Cultist(42,42,deck,this,player));
-        enemies.add(new Hexaghost(250,250,deck,this,player));
+        //enemies.add(new Hexaghost(250,250,deck,this,player));
+        enemies.add(new Lagavulin(110,110,deck,this,player));
 
         etb = new EndTurnButton(deck); 
 

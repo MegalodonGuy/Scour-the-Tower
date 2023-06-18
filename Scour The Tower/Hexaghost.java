@@ -8,13 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Hexaghost extends Enemy
 {
-    private boolean firstMove;
     private FightWorld world;
     GreenfootImage image;
     private int patternNum=-1;
     public Hexaghost(int health, int maxHealth,Deck deck, FightWorld world, Player player){
         super(maxHealth, health, deck, world,player);
-        firstMove=true;
         this.world=world;
         image = new GreenfootImage("Hexaghost.png");
         image.scale(200,200);
