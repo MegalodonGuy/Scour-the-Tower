@@ -90,7 +90,7 @@ public class FightWorld extends World
         addObject(etb,900,700);
         addObject(player, 200,400);
         for (int x =0; x<enemies.size(); x++){
-            addObject((Entity)enemies.get(x), 800-250*x,400);
+            addObject((Entity)enemies.get(x), 800-250*x,370);
         }
         Util.updateCardVisuals(hand, deck, this);
     }

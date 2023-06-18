@@ -16,7 +16,7 @@ public class JawWorm extends Enemy
         firstMove=true;
         this.world=world;
         image = new GreenfootImage("JawWorm.png");
-        image.scale(300,300);
+        image.scale(200,200);
         setImage(image);
         nextMove="Chomp";
         ran=0;

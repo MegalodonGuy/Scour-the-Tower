@@ -16,7 +16,7 @@ public class Cultist extends Enemy
         firstMove=true;
         this.world=world;
         image = new GreenfootImage("CawCaw.png");
-        image.scale(300,300);
+        image.scale(200,200);
         setImage(image);
         nextMove="Incantation";
     } 
