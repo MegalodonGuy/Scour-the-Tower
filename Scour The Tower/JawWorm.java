@@ -63,7 +63,7 @@ public class JawWorm extends Enemy
 
     protected void move3(){ // bellow
         increaseStrength(3);  
-        block(5);
+        block(6);
         //System.out.println("Bellow");
     }
     
