@@ -71,6 +71,9 @@ public class Player extends Entity
         dex=0;
         demonForm=0;
         metallicize=0;
+        vulnerable=0;
+        weakened=0;
+        block=0;
         barricade=false;
     }
     
