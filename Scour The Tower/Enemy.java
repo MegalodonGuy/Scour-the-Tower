@@ -91,7 +91,7 @@ public class Enemy extends Entity
             intentSymbol = new IntentSymbols(new GreenfootImage("SmallAttackDebuff.png"));    
             break;
             case "Inflame":
-            intentSymbol = new IntentSymbols(new GreenfootImage("BuffIntent.png"));    
+            intentSymbol = new IntentSymbols(new GreenfootImage("BlockBuff.png"));    
             break;
             case "Tackle":
             intentSymbol = new IntentSymbols(new GreenfootImage("SwordIntent.png"));    
@@ -145,7 +145,7 @@ public class Enemy extends Entity
             intentSymbol.setImage("SmallAttackDebuff.png");  
             break;
             case "Inflame":
-            intentSymbol.setImage("BuffIntent.png");    
+            intentSymbol.setImage("BlockBuff.png");    
             break;
             case "Tackle":
             intentSymbol.setImage("SwordIntent.png");  

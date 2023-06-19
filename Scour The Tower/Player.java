@@ -29,6 +29,8 @@ public class Player extends Entity
         if (!spawned){
             world.addObject(bar, getX()+40, getY()+105);
             world.addObject(label, getX()+40, getY()+105);
+            world.addObject(blockSymbol, getX()+100, getY()+105);
+            world.addObject(blockLabel, getX()+100, getY()+105);
             spawned=true;
         }
         if (Greenfoot.mouseClicked(this)){
@@ -41,7 +43,9 @@ public class Player extends Entity
         world.removeObject(this);
         world.removeObject(this.bar);
         world.removeObject(this.label);
-        dead=true;
+        world.removeObject(this.blockSymbol);
+        world.removeObject(this.blockLabel);
+        dead=true; 
         System.out.println("Darn, you died");
         Greenfoot.setWorld(new StartScreen());
     }
