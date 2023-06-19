@@ -21,7 +21,7 @@ public class StartScreen extends World
     public StartScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(1152, 648, 1); 
         initialDeck.add(new Card(1)); 
         initialDeck.add(new Card(1));  
         initialDeck.add(new Card(2)); 
@@ -73,7 +73,7 @@ public class StartScreen extends World
         deck = new Deck(initialDeck);
         startButton=new StartButton(this);
         player = new Player(80,80,deck,startButton.getFightWorld());
-        addObject(startButton,300,200);
+        addObject(startButton,610,390);
     }
     
     public Player getPlayer(){
