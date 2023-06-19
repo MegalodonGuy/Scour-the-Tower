@@ -50,6 +50,7 @@ public class FightWorld extends World
 
         // selects level, randomizes fights and miniboss
         int ran= ((int)(Math.random()*100))+1;
+        
         if (this.levelNum<3){
             if (ran<=50){
                 enemies.add(new JawWorm(42,42,deck,this,player));
@@ -124,15 +125,16 @@ public class FightWorld extends World
         
         // when you win the fight
         if (enemies.size()==0){
-            if (levelNum<6){
+            if (levelNum>=8){
+                System.out.println("You Win!");
+                Greenfoot.setWorld(new StartScreen());
+            }
+            else if (levelNum<999){
                 player.afterFight();
                 player.setSpawned(false);
                 deck.setEnergy(deck.getMaxEnergy());
                 deck.reset();
                 Greenfoot.setWorld(new FightWorld(player,deck,levelNum,fullDeck));
-            }
-            else if (levelNum==6){
-                System.out.println("You Win!");
             }
         }
     }
