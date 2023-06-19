@@ -49,7 +49,14 @@ public class FightWorld extends World
             }
         }
         else if (this.levelNum==3){
-            enemies.add(new Lagavulin(110,110,deck,this,player));
+            if (ran<=50){
+                enemies.add(new Lagavulin(110,110,deck,this,player));
+            }
+            else if (ran>50){
+                enemies.add(new Sentry(250,250,deck,this,player,1));
+                enemies.add(new Sentry(250,250,deck,this,player,2));
+                enemies.add(new Sentry(250,250,deck,this,player,1));
+            }
         }
         else if (this.levelNum>3 && this.levelNum<6){
             if (ran<=50){
@@ -62,13 +69,19 @@ public class FightWorld extends World
         else if (levelNum==6){
             enemies.add(new Hexaghost(250,250,deck,this,player));
         }
+        
 
         etb = new EndTurnButton(deck); 
         addObject(this.deck,0,0);
         addObject(etb,900,700);
         addObject(this.player, 200,400);
+
+        int decayFactor=enemies.size();
+        
+        // same system as the cards, they get bunched together if there is a lot of them
+        int enemySpacing=(int)(300*(Math.pow(1-0.2,decayFactor)));
         for (int x =0; x<enemies.size(); x++){
-            addObject((Entity)enemies.get(x), 800-250*x,370);
+            addObject((Entity)enemies.get(x), 800-enemySpacing*x,370);
         }
         Util.updateCardVisuals(hand, deck, this);
     }
