@@ -51,77 +51,84 @@ public class Entity extends Actor
             spawned=true;
         }
         if (Greenfoot.mouseClicked(this)){
-            // if card used on character
-            if (Deck.getSelectedCard()!=null){
-                Card card = (Card)Deck.getSelectedCard();
-                if (card.getEnergy()>deck.getAvailableEnergy()){
-                    return; 
-                }
-                int attackNum=card.getAttackNum();
-                int strengthFactor=1;
-                
-                //cards with special effects
-                if (card.getCardID()==9){
-                    attackNum=deck.getHand().size()-1;
-                }
-                else if (card.getCardID()==12){
-                    deck.drawRandom();
-                    deck.drawRandom();
-                }
-                else if (card.getCardID()==15){
-                    world.getPlayer().takeStaticDamage(2); // dont want other effects to take place
-                }
-                else if (card.getCardID()==17){
-                    this.increaseStrength(-2); 
-                }
-                else if (card.getCardID()==33 && vulnerable>0){
-                    deck.drawRandom();
-                    deck.gainEnergy(1);
-                }
-                else if (card.getCardID()==34){
-                    strengthFactor=3;
-                }
-                else if (card.getCardID()==37){
-                    Card cardCopy = new Card(37); // supposed to be direct copy but I cant be arsed
-                    deck.addIntoDiscardPile(cardCopy);
-                }
-                else if (card.getCardID()==40){ 
-                    deck.addIntoDrawPile(new Card(39));
-                }
-                else if (card.getCardID()==42){ 
-                    deck.addIntoDrawPile(new Card(43));
-                }
-
-                int tempStrength=world.getPlayer().getStrength();
-                if (card.getDamage()==0){ // so cards that dont attack aren't effected by strength
-                    tempStrength=0; 
-                }
-                
-                //if it is a target card use it on this
-                if (card.getTarget()){
-                    for (int i=0; i<attackNum; i++){
-                        hit(card.getDamage()+tempStrength*strengthFactor,card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
-                        if (card.getCardID()==20&&this.dead){
-                            world.getPlayer().increaseMaxHealth(3);
-                        }
-                        world.getPlayer().block(card.getBlock());
-                    }
-                    deck.playedCard(card);
-                }
-                else{
-                    //use it on world
-                    world.cardUsedOnWorld(); 
-                }
-                
-                //fiend fire
-                if (card.getCardID()==9){
-                    deck.exhaustHand(card);
-                }
-            }
+            clicked();
         } 
 
     }
     
+    /**
+     * registered when player clicks on enemy, tries to use selected card on it
+     */
+    public void clicked(){
+        // if card used on character
+        if (Deck.getSelectedCard()!=null){
+            Card card = (Card)Deck.getSelectedCard();
+            if (card.getEnergy()>deck.getAvailableEnergy()){
+                return; 
+            }
+            int attackNum=card.getAttackNum();
+            int strengthFactor=1;
+
+            //cards with special effects
+            if (card.getCardID()==9){
+                attackNum=deck.getHand().size()-1;
+            }
+            else if (card.getCardID()==12){
+                deck.drawRandom();
+                deck.drawRandom();
+            }
+            else if (card.getCardID()==15){
+                world.getPlayer().takeStaticDamage(2); // dont want other effects to take place
+            }
+            else if (card.getCardID()==17){
+                this.increaseStrength(-2); 
+            }
+            else if (card.getCardID()==33 && vulnerable>0){
+                deck.drawRandom();
+                deck.gainEnergy(1);
+            }
+            else if (card.getCardID()==34){
+                strengthFactor=3;
+            }
+            else if (card.getCardID()==37){
+                Card cardCopy = new Card(37); // supposed to be direct copy but I cant be arsed
+                deck.addIntoDiscardPile(cardCopy);
+            }
+            else if (card.getCardID()==40){ 
+                deck.addIntoDrawPile(new Card(39));
+            }
+            else if (card.getCardID()==42){ 
+                deck.addIntoDrawPile(new Card(43));
+            }
+
+            int tempStrength=world.getPlayer().getStrength();
+            if (card.getDamage()==0){ // so cards that dont attack aren't effected by strength
+                tempStrength=0; 
+            }
+
+            //if it is a target card use it on this
+            if (card.getTarget()){
+                for (int i=0; i<attackNum; i++){
+                    hit(card.getDamage()+tempStrength*strengthFactor,card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
+                    if (card.getCardID()==20&&this.dead){
+                        world.getPlayer().increaseMaxHealth(3);
+                    }
+                    world.getPlayer().block(card.getBlock());
+                }
+                deck.playedCard(card);
+            }
+            else{
+                //use it on world
+                world.cardUsedOnWorld(); 
+            }
+
+            //fiend fire
+            if (card.getCardID()==9){
+                deck.exhaustHand(card);
+            }
+        }
+    }
+
     /**
      * hit for damage, apply vulnerable and weaken (usually 0), 
      * if attacker is weakend dmg foes down if this is vulnerable dmg goes up
@@ -153,18 +160,18 @@ public class Entity extends Actor
         }
 
     }
-    
+
     /**
      * heal for certain amount of health, cannot go above max
      */
     public void heal (int health){ 
         this.health+=health;
-        if (health>maxHealth){ 
+        if (this.health>this.maxHealth){ 
             this.health=this.maxHealth;
         }
         label.setText(this.health + "/" + maxHealth);
     }
-    
+
     /**
      * deal damage ignoring various effects
      */
@@ -175,7 +182,7 @@ public class Entity extends Actor
         }
         label.setText(health + "/" + maxHealth);
     }
-    
+
     public void reduceMaxHealth(int reduction){
         maxHealth-=reduction;
         if (health>maxHealth){ 
@@ -188,7 +195,7 @@ public class Entity extends Actor
         reduceMaxHealth(-promotion); 
         label.setText(health + "/" + maxHealth);
     }
-    
+
     /**
      * block takes away the damagae that would have been done without it = to itslef
      */
@@ -241,7 +248,7 @@ public class Entity extends Actor
     public int getMaxHealth(){
         return maxHealth;
     }
-    
+
     /**
      * when turn passed block resets, statuses you have go down and powers do their thing
      */
@@ -260,7 +267,7 @@ public class Entity extends Actor
         strength+=incantation;
         block+=metallicize;
     }
-    
+
     //powers
 
     public void barricade(){

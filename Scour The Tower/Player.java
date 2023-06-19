@@ -42,6 +42,7 @@ public class Player extends Entity
         world.removeObject(this.bar);
         world.removeObject(this.label);
         dead=true;
+        System.out.println("Darn, you died");
         Greenfoot.setWorld(new StartScreen());
     }
     
