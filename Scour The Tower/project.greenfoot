@@ -1,6 +1,6 @@
 #Greenfoot project file
 class.Card.image=Burn+.png
-class.Deck.image=4.png
+class.Deck.image=Null.png
 class.EndTurnButton.image=End.png
 class.Energy.image=energy.png
 class.FightWorld.image=ActOne.png
@@ -188,10 +188,10 @@ dependency8.type=UsesDependency
 dependency9.from=FightWorld
 dependency9.to=Label
 dependency9.type=UsesDependency
-editor.fx.0.height=739
-editor.fx.0.width=816
-editor.fx.0.x=552
-editor.fx.0.y=100
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
 height=1056
 package.numDependencies=59
 package.numTargets=19
