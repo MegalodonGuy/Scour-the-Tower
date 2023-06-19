@@ -41,6 +41,7 @@ public class Player extends Entity
         world.removeObject(this);
         world.removeObject(this.bar);
         dead=true;
+        Greenfoot.setWorld(new StartScreen());
     }
     
     public int getStrength(){
