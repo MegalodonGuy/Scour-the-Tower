@@ -29,12 +29,11 @@ public class Cultist extends Enemy
         if (firstMove){
             move1(); 
             firstMove=false; 
-            nextMove();
         }
         else{
             move2();
-            nextMove();
         }
+        nextMove();
     }
 
     protected void move1(){ 
@@ -46,7 +45,8 @@ public class Cultist extends Enemy
         player.hit(6+strength,0,0,weakened);
         //System.out.println("Dark Strike");
     }
-
+    
+    // finds next move
     public void nextMove(){
         if (firstMove){
             nextMove="Incantaition";

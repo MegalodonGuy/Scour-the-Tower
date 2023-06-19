@@ -20,7 +20,7 @@ public class FightWorld extends World
     public Label energyLabel;
     GreenfootImage image; 
     /**
-     * Constructor for objects of class MyWorld.
+     * takes player deck the previous level, and the players deck, level number is incresed to this one
      * 
      */
     public FightWorld(Player player, Deck deck, int levelNum,ArrayList fullDeck)
@@ -37,6 +37,7 @@ public class FightWorld extends World
 
         image.scale(1000,800);
         getBackground().drawImage(image,0,0);
+        // reset selected card class variable
         Deck.setSelected(null);
 
         this.deck=deck;
@@ -47,6 +48,7 @@ public class FightWorld extends World
 
         player.setWorld(this);
 
+        // selects level, randomizes fights and miniboss
         int ran= ((int)(Math.random()*100))+1;
         if (this.levelNum<3){
             if (ran<=50){
@@ -77,14 +79,14 @@ public class FightWorld extends World
         else if (levelNum==6){
             enemies.add(new Hexaghost(250,250,deck,this,player));
         }
-        else if (levelNum==7){
-            System.out.println("You Win!");
-        }
-
+        
+        // add deck, button, player
         etb = new EndTurnButton(deck); 
         addObject(this.deck,0,0);
         addObject(etb,900,700);
         addObject(this.player, 200,400);
+    
+        // add the enemies of the level, squeezes them together when there is a bunch
         addObject(energy, 75,700);
         addObject(energyLabel, 74,700);
         
@@ -102,10 +104,12 @@ public class FightWorld extends World
     public void act(){
         Util.updateCardVisuals(hand, deck, this);
         for (int x=0; x< enemies.size(); x++){
+            // remove when dead
             if(((Entity)enemies.get(x)).getDead()){
                 enemies.remove(x);
             }
         }
+        // when turn pass let entities know
         if (etb.getTurnPassed()){
             for (int x=0; x< enemies.size(); x++){
                 ((Entity)enemies.get(x)).turnPassed();
@@ -114,29 +118,39 @@ public class FightWorld extends World
             etb.setTurnPassed(false);
         }
         if (Greenfoot.mouseClicked(this) && Deck.getSelectedCard()!=null){
-            // if card used on enemy
+            // if card used on world
             cardUsedOnWorld(); 
         }
-
+        
+        // when you win the fight
         if (enemies.size()==0){
-            if (levelNum<7){
+            if (levelNum<6){
                 player.afterFight();
                 player.setSpawned(false);
                 deck.setEnergy(deck.getMaxEnergy());
                 deck.reset();
                 Greenfoot.setWorld(new FightWorld(player,deck,levelNum,fullDeck));
             }
+            else if (levelNum==6){
+                System.out.println("You Win!");
+            }
         }
     }
-
+    
+    /**
+     * for non target attacks, including aoe and random attacks
+     */
     public void cardUsedOnWorld(){
         Card card = (Card)Deck.getSelectedCard();
+        //early return
         if (card==null){
             return;
         }
         if (card.getEnergy()>deck.getAvailableEnergy()){
             return; 
         }
+        
+        //do things for special cards
         if (card.getCardID()==10){
             deck.drawRandom();
         }
@@ -195,9 +209,11 @@ public class FightWorld extends World
         }
 
         int tempStrength=player.getStrength();
-        if (card.getDamage()==0){ // so cards that dont attack aren't effected
+        if (card.getDamage()==0){ // so cards that dont attack aren't effected by strength
             tempStrength=0;
         }
+        
+        //random attack
         if (!card.getTarget() &&!card.getAOE()){
             for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
@@ -208,6 +224,7 @@ public class FightWorld extends World
 
         }
         else if (card.getAOE()){
+            //aoe
             for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){

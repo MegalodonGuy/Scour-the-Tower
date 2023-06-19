@@ -24,8 +24,6 @@ public class Entity extends Actor
     protected boolean barricade=false;
     protected int demonForm=0;
     protected int metallicize=0;
-
-    //enemy effects
     private int incantation=0;
 
     protected boolean spawned = false;
@@ -58,6 +56,7 @@ public class Entity extends Actor
                 }
                 int attackNum=card.getAttackNum();
                 int strengthFactor=1;
+                
                 //cards with special effects
                 if (card.getCardID()==9){
                     attackNum=deck.getHand().size()-1;
@@ -91,10 +90,11 @@ public class Entity extends Actor
                 }
 
                 int tempStrength=world.getPlayer().getStrength();
-                if (card.getDamage()==0){ // so cards that dont attack aren't effected
-                    tempStrength=0;
+                if (card.getDamage()==0){ // so cards that dont attack aren't effected by strength
+                    tempStrength=0; 
                 }
-
+                
+                //if it is a target card use it on this
                 if (card.getTarget()){
                     for (int i=0; i<attackNum; i++){
                         hit(card.getDamage()+tempStrength*strengthFactor,card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
@@ -106,9 +106,11 @@ public class Entity extends Actor
                     deck.playedCard(card);
                 }
                 else{
+                    //use it on world
                     world.cardUsedOnWorld(); 
                 }
-
+                
+                //fiend fire
                 if (card.getCardID()==9){
                     deck.exhaustHand(card);
                 }
@@ -116,7 +118,11 @@ public class Entity extends Actor
         } 
 
     }
-
+    
+    /**
+     * hit for damage, apply vulnerable and weaken (usually 0), 
+     * if attacker is weakend dmg foes down if this is vulnerable dmg goes up
+     */
     public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
         double dmgMod=1; 
         if (this.vulnerable>0){
@@ -143,21 +149,27 @@ public class Entity extends Actor
         }
 
     }
-
+    
+    /**
+     * heal for certain amount of health, cannot go above max
+     */
     public void heal (int health){ 
         this.health+=health;
         if (health>maxHealth){ 
             health=maxHealth;
         }
     }
-
+    
+    /**
+     * deal damage ignoring various effects
+     */
     public void takeStaticDamage(int dmg){
         this.health-=dmg;
         if (health<=0 && !dead){
             die();
         }
     }
-
+    
     public void reduceMaxHealth(int reduction){
         maxHealth-=reduction;
         if (health>maxHealth){ 
@@ -168,7 +180,10 @@ public class Entity extends Actor
     public void increaseMaxHealth(int promotion){
         reduceMaxHealth(-promotion); 
     }
-
+    
+    /**
+     * block takes away the damagae that would have been done without it = to itslef
+     */
     public void block (int block){
         if (block==0){
             return;
@@ -217,7 +232,10 @@ public class Entity extends Actor
     public int getMaxHealth(){
         return maxHealth;
     }
-
+    
+    /**
+     * when turn passed block resets, statuses you have go down and powers do their thing
+     */
     public void turnPassed(){
         if (!barricade){
             this.block=0;
@@ -233,7 +251,8 @@ public class Entity extends Actor
         strength+=incantation;
         block+=metallicize;
     }
-    //powers/enemy effects
+    
+    //powers
 
     public void barricade(){
         barricade=true;

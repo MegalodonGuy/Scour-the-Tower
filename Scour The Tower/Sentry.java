@@ -19,7 +19,7 @@ public class Sentry extends Enemy
         image = new GreenfootImage("Sentry.png");
         image.scale(200,200);
         setImage(image);
-
+        //sentries start off with different moves
         if (sentryNum==1){
             nextMove="Bolt";
             this.patternNum=0;
@@ -35,7 +35,7 @@ public class Sentry extends Enemy
         if (dead){
             return; 
         }
-
+        // cycles between 2 attacks
         switch (patternNum){
             case 0:
                 move1();
@@ -52,7 +52,7 @@ public class Sentry extends Enemy
 
     protected void move1(){ 
         //System.out.println("Bolt");
-
+        // add 2 dazed cards into discard pile
         deck.addIntoDiscardPile(new Card(43));
         deck.addIntoDiscardPile(new Card(43));
     }

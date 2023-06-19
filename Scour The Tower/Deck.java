@@ -20,14 +20,17 @@ public class Deck extends Actor
     
     private boolean battleTrance=false;
     public Deck(ArrayList<Object> deck){
+        // set deck as deck that passes through and puts it all into draw pile
         this.deck=Util.cloneContents(deck); 
         drawPile=Util.cloneContents(deck); 
         maxEnergy=3; 
         energy=maxEnergy;
+        // deal first hand
         deal();
     }
     
     public void reset(){
+        // reset deck variables after new level 
         drawPile=Util.cloneContents(deck); 
         maxEnergy=3; 
         energy=maxEnergy;
@@ -42,7 +45,11 @@ public class Deck extends Actor
     {
 
     } 
-
+    
+    /**
+     * draws random card from hand
+     * 
+     */
     public void drawRandom(){
         if (battleTrance){
             return;
@@ -55,7 +62,10 @@ public class Deck extends Actor
         hand.add(drawPile.get(0)); 
         drawPile.remove(0); 
     }
-
+    
+    /**
+     * Draws 5 random cards at the start of a turn
+     */
     public void deal(){
         discardHand(); 
         battleTrance=false;
@@ -63,7 +73,10 @@ public class Deck extends Actor
             drawRandom(); 
         }
     } 
-
+    
+    /**
+     * discard entire hand
+     */
     public void discardHand(){ 
         int cardAmount=hand.size();
         for (int i=0; i<cardAmount; i++){
@@ -90,14 +103,20 @@ public class Deck extends Actor
 
         energy=maxEnergy; 
     }
-
+    
+    /**
+     * put all cards into exhaust pile where they cannot be drawn that fight
+     */
     public void exhaustHand(Card card){
         while(hand.size()>0){
               exhaustCard((Card)hand.get(0));
         }
         setSelected(null);
     }
-
+    
+    /**
+     * put card into exhaust pile where it cannot be drawn that fight
+     */
     public void exhaustCard(Card card){
         if (card.getCardID()==28){
             energy+=2;
@@ -106,7 +125,10 @@ public class Deck extends Actor
         hand.remove(card); 
         getWorld().removeObject(card);
     }
-
+    
+    /**
+     * discards the card passed into it
+     */
     public void discardCard(Object card){
         Card usedCard = (Card)card;
         if (usedCard.getCardID()==36){
@@ -126,12 +148,16 @@ public class Deck extends Actor
         usedCard.deselect();  
         setSelected(null);
     }
-
+    
+    /**
+     * discard played card and lose energy = to cost
+     */
     public void playedCard(Object card){
         this.energy-=((Card)card).getEnergy(); 
         discardCard(card); 
     }
     
+    //self explanitory methods
     public void addIntoDiscardPile(Card card){
         discardPile.add(card);
     }
@@ -141,36 +167,33 @@ public class Deck extends Actor
     public void addIntoDrawPile(Card card){
         drawPile.add(card);
     }
-
     public ArrayList<Object> getHand(){
         return hand;
     }
-
     public static Object getSelectedCard(){
         return selectedCard; 
     }
-
     public static void setSelected(Object card){
         selectedCard=card; 
     }
-
-    public int getAvailableEnergy(){
+    public int getAvailableEnergy(){ 
         return energy; 
     }
-    public void battleTrance(){
+    // battle trance card makes it so you cannot draw that turn after used
+    public void battleTrance(){ 
         battleTrance=true;
     }
 
+    
     public int getMaxEnergy(){
         return maxEnergy; 
     }
-
     public void gainEnergy(int energy){
         this.energy+=energy;
         //can go above max just like in game
     }
     
-    public void upgradeAllBurns(){ // for hexaghost
+    public void upgradeAllBurns(){ // for hexaghost, upgrade all burns in the fight
         for (int x=0; x<hand.size(); x++){
             if (((Card)hand.get(x)).getCardID()==36){
                 ((Card)hand.get(x)).upgrade();

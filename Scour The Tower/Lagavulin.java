@@ -28,7 +28,9 @@ public class Lagavulin extends Enemy
         if (dead){
             return; 
         }
-
+    
+        // if it is attacked wake it up and it waits a turn to attack, if 3 moves go by it will wake up and attack immediatly
+        //when it is awake it attacks twice then debuffs
         switch (patternNum){
             case -2:
                 move1();
@@ -78,7 +80,10 @@ public class Lagavulin extends Enemy
         player.increaseStrength(-1);
         //System.out.println("Tackle");
     }
-
+    
+    /**
+     * if it is hit then it wakes up early, it has to do damage so it must break its block and do atleast 1 damage
+     */
     @Override
     public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
         super.hit(damage,vulnerable,weaken,attackerWeakend);
@@ -92,6 +97,7 @@ public class Lagavulin extends Enemy
         }
     }
     
+
     private void wakeUp(){
         image = new GreenfootImage("Lagavulin.png");
         image.scale(200,200);

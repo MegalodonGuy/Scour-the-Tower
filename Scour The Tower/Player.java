@@ -25,6 +25,7 @@ public class Player extends Entity
      */
     public void act()
     {
+        // dont use cards on player, use on world if clicked
         if (!spawned){
             world.addObject(bar, getX()+40, getY()+105);
             spawned=true;
@@ -51,11 +52,12 @@ public class Player extends Entity
     public void setWorld(FightWorld fightworld){
         world=fightworld;
     }
-    
     public void setSpawned(boolean spawned){
         this.spawned=spawned;
     }
-    
+    /**
+     * reset after fight
+     */
     public void afterFight(){
         strength=0;
         dex=0;

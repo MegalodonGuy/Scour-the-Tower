@@ -26,7 +26,7 @@ public class Hexaghost extends Enemy
         if (dead){
             return; 
         }
-
+        //goes thru 2 starting moves and repeat 1-->7
         switch (patternNum){
             case -1:
                 move1();
@@ -75,6 +75,7 @@ public class Hexaghost extends Enemy
 
     protected void move2(){
         player.hit(6+strength,0,0,weakened);
+        //add burn
         deck.addIntoDiscardPile(new Card(36));
         //System.out.println("Sear");
     }
@@ -94,6 +95,7 @@ public class Hexaghost extends Enemy
     protected void move5(){
         player.hit(6+strength,0,0,weakened);
         player.hit(6+strength,0,0,weakened);
+        //add burns
         deck.addIntoDiscardPile(new Card(36));
         deck.addIntoDiscardPile(new Card(36));
         deck.addIntoDiscardPile(new Card(36));
