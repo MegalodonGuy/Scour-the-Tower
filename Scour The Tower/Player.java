@@ -16,6 +16,7 @@ public class Player extends Entity
         image = new GreenfootImage("Ironclad.png");
         image.scale(300,200);
         setImage(image);
+        spawned=false;
     }
 
     /**
@@ -32,13 +33,12 @@ public class Player extends Entity
             world.cardUsedOnWorld(); 
         } 
     }
-
-    @Override
-    public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
-        super.hit(damage, vulnerable, weaken, attackerWeakend); 
-        if (health<=0){
-            //lose world 
-        }
+    
+    @Override 
+    public void die(){
+        world.removeObject(this);
+        world.removeObject(this.bar);
+        dead=true;
     }
     
     public int getStrength(){
@@ -46,6 +46,14 @@ public class Player extends Entity
     }
     public int getDex(){
         return dex;
+    }
+    
+    public void setWorld(FightWorld fightworld){
+        world=fightworld;
+    }
+    
+    public void setSpawned(boolean spawned){
+        this.spawned=spawned;
     }
     
 }

@@ -26,6 +26,13 @@ public class Deck extends Actor
         energy=maxEnergy;
         deal();
     }
+    
+    public void reset(){
+        drawPile=Util.cloneContents(deck); 
+        maxEnergy=3; 
+        energy=maxEnergy;
+        deal();
+    }
 
     /**
      * Act - do whatever the Deck wants to do. This method is called whenever
@@ -184,5 +191,9 @@ public class Deck extends Actor
                 ((Card)exhaustPile.get(x)).upgrade();
             }
         }
+    }
+    
+    public void setEnergy(int num){
+        energy=num;
     }
 }
