@@ -16,7 +16,7 @@ public class StartButton extends Button
     
     public void act(){
         // makes new fight world based on player and deck made in start screen, next level will be level 1
-        fightWorld =new FightWorld(startScreen.getPlayer(),startScreen.getDeck(),0,startScreen.getFullDeck());
+        fightWorld =new FightWorld(startScreen.getPlayer(),startScreen.getDeck(),2,startScreen.getFullDeck());
         if (Greenfoot.mouseClicked(this)){
              buttonAction();  
             }

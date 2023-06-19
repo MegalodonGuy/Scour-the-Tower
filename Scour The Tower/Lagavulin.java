@@ -102,7 +102,6 @@ public class Lagavulin extends Enemy
         image = new GreenfootImage("Lagavulin.png");
         image.scale(200,200);
         setImage(image);
-        patternNum=0;
         nextMove();
         updateIntentSymbol();
         intentLabel.setText(""+getNextMove());
