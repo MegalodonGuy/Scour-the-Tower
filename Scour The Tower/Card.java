@@ -25,7 +25,7 @@ public class Card extends Actor
     private boolean exhaust; // goes to exhaust pile instead of discard pile
     private boolean power;
     private boolean ethereal; // if card isn't used, exhaust
-    GreenfootImage image; 
+    private GreenfootImage image; 
     public Card(int CardID){
         this.CardID = CardID;
 
