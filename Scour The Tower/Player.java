@@ -56,4 +56,12 @@ public class Player extends Entity
         this.spawned=spawned;
     }
     
+    public void afterFight(){
+        strength=0;
+        dex=0;
+        demonForm=0;
+        metallicize=0;
+        barricade=false;
+    }
+    
 }
