@@ -21,9 +21,9 @@ public class Entity extends Actor
     private FightWorld world;
     protected Bar bar;
     //powers
-    private boolean barricade=false;
-    private int demonForm=0;
-    private int metallicize=0;
+    protected boolean barricade=false;
+    protected int demonForm=0;
+    protected int metallicize=0;
 
     //enemy effects
     private int incantation=0;

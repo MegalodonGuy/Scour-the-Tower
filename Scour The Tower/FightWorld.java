@@ -69,7 +69,9 @@ public class FightWorld extends World
         else if (levelNum==6){
             enemies.add(new Hexaghost(250,250,deck,this,player));
         }
-        
+        else if (levelNum==7){
+            System.out.println("You Win!");
+        }
 
         etb = new EndTurnButton(deck); 
         addObject(this.deck,0,0);
@@ -77,7 +79,7 @@ public class FightWorld extends World
         addObject(this.player, 200,400);
 
         int decayFactor=enemies.size();
-        
+
         // same system as the cards, they get bunched together if there is a lot of them
         int enemySpacing=(int)(300*(Math.pow(1-0.2,decayFactor)));
         for (int x =0; x<enemies.size(); x++){
@@ -106,10 +108,13 @@ public class FightWorld extends World
         }
 
         if (enemies.size()==0){
-            player.setSpawned(false);
-            deck.setEnergy(deck.getMaxEnergy());
-            deck.reset();
-            Greenfoot.setWorld(new FightWorld(player,deck,levelNum,fullDeck));
+            if (levelNum<7){
+                player.afterFight();
+                player.setSpawned(false);
+                deck.setEnergy(deck.getMaxEnergy());
+                deck.reset();
+                Greenfoot.setWorld(new FightWorld(player,deck,levelNum,fullDeck));
+            }
         }
     }
 
