@@ -28,6 +28,7 @@ public class Player extends Entity
         // dont use cards on player, use on world if clicked
         if (!spawned){
             world.addObject(bar, getX()+40, getY()+105);
+            world.addObject(label, getX()+40, getY()+105);
             spawned=true;
         }
         if (Greenfoot.mouseClicked(this)){

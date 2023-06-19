@@ -20,6 +20,7 @@ public class Entity extends Actor
 
     private FightWorld world;
     protected Bar bar;
+    protected Label label;
     //powers
     protected boolean barricade=false;
     protected int demonForm=0;
@@ -35,6 +36,7 @@ public class Entity extends Actor
         dead=false;
         this.world =world; 
         bar = new Bar(this);
+        label = new Label(health + "/" + maxHealth);
     }
 
     /**
@@ -45,6 +47,7 @@ public class Entity extends Actor
     {
         if (!spawned){
             world.addObject(bar, getX(), getY()+125);
+            world.addObject(label, getX(), getY()+125);
             spawned=true;
         }
         if (Greenfoot.mouseClicked(this)){
@@ -141,6 +144,7 @@ public class Entity extends Actor
             block=tempBlock;
         }
         health-=dmg; 
+        label.setText(health + "/" + maxHealth);
 
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
