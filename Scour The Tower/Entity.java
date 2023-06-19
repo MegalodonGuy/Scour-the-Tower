@@ -160,8 +160,9 @@ public class Entity extends Actor
     public void heal (int health){ 
         this.health+=health;
         if (health>maxHealth){ 
-            health=maxHealth;
+            this.health=this.maxHealth;
         }
+        label.setText(this.health + "/" + maxHealth);
     }
     
     /**
@@ -172,6 +173,7 @@ public class Entity extends Actor
         if (health<=0 && !dead){
             die();
         }
+        label.setText(health + "/" + maxHealth);
     }
     
     public void reduceMaxHealth(int reduction){
@@ -179,10 +181,12 @@ public class Entity extends Actor
         if (health>maxHealth){ 
             health=maxHealth;
         }
+        label.setText(health + "/" + maxHealth);
     }
 
     public void increaseMaxHealth(int promotion){
         reduceMaxHealth(-promotion); 
+        label.setText(health + "/" + maxHealth);
     }
     
     /**
@@ -222,6 +226,7 @@ public class Entity extends Actor
     public void die(){
         getWorld().removeObject(this);
         world.removeObject(this.bar);
+        world.removeObject(this.label);
         dead=true; 
     }
 
