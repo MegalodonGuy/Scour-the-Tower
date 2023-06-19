@@ -127,7 +127,7 @@ public class Enemy extends Entity
         }
     }
     
-    private void updateIntentSymbol(){
+    protected void updateIntentSymbol(){
         switch(getNextMove()){
             case "Dark Strike":
             intentSymbol.setImage("SwordIntent.png");  
@@ -169,13 +169,16 @@ public class Enemy extends Entity
             intentSymbol.setImage("SmallDebuff.png");    
             break;
             case "Attack":
-            intentSymbol.setImage("SwordIntent.png");    
+            intentSymbol.setImage("MediumAttack.png");    
             break;
             case "Siphon Soul":
             intentSymbol.setImage("Debuff.png");     
             break;
             case "Sleep":
             intentSymbol.setImage("SleepingIntent.png");   
+            break;
+            case "Stunned":
+            intentSymbol.setImage("Stunned.png");   
             break;
             
         }
