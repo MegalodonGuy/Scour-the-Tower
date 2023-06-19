@@ -16,6 +16,8 @@ public class FightWorld extends World
     private Player player;
     private EndTurnButton etb;  
     private int levelNum;
+    private Energy energy;
+    public Label energyLabel;
     GreenfootImage image; 
     /**
      * takes player deck the previous level, and the players deck, level number is incresed to this one
@@ -29,6 +31,9 @@ public class FightWorld extends World
         image = new GreenfootImage("ActOne.png");
 
         this.levelNum=levelNum+1;
+        
+        
+        
 
         image.scale(1000,800);
         getBackground().drawImage(image,0,0);
@@ -37,6 +42,9 @@ public class FightWorld extends World
 
         this.deck=deck;
         this.player=player;
+        
+        energyLabel = new Label("3/3");
+        Energy energy = new Energy(3, 3, deck);
 
         player.setWorld(this);
 
@@ -79,6 +87,10 @@ public class FightWorld extends World
         addObject(this.player, 200,400);
     
         // add the enemies of the level, squeezes them together when there is a bunch
+        addObject(energy, 75,700);
+        addObject(energyLabel, 74,700);
+        
+
         int decayFactor=enemies.size();
 
         // same system as the cards, they get bunched together if there is a lot of them

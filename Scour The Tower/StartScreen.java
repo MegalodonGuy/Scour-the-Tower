@@ -75,6 +75,7 @@ public class StartScreen extends World
         deck = new Deck(initialDeck);
         startButton=new StartButton(this);
         player = new Player(80,80,deck,startButton.getFightWorld());
+        
         addObject(startButton,490,400);
     }
     
