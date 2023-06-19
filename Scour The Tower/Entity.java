@@ -160,9 +160,9 @@ public class Entity extends Actor
     public void heal (int health){ 
         this.health+=health;
         if (health>maxHealth){ 
-            health=maxHealth;
+            this.health=this.maxHealth;
         }
-        label.setText(health + "/" + maxHealth);
+        label.setText(this.health + "/" + maxHealth);
     }
     
     /**
