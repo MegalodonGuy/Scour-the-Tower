@@ -16,6 +16,8 @@ public class FightWorld extends World
     private Player player;
     private EndTurnButton etb;  
     private int levelNum;
+    private Energy energy;
+    public Label energyLabel;
     GreenfootImage image; 
     /**
      * Constructor for objects of class MyWorld.
@@ -29,6 +31,9 @@ public class FightWorld extends World
         image = new GreenfootImage("ActOne.png");
 
         this.levelNum=levelNum+1;
+        
+        
+        
 
         image.scale(1000,800);
         getBackground().drawImage(image,0,0);
@@ -36,6 +41,9 @@ public class FightWorld extends World
 
         this.deck=deck;
         this.player=player;
+        
+        energyLabel = new Label("3/3");
+        Energy energy = new Energy(3, 3, deck);
 
         player.setWorld(this);
 
@@ -77,6 +85,9 @@ public class FightWorld extends World
         addObject(this.deck,0,0);
         addObject(etb,900,700);
         addObject(this.player, 200,400);
+        addObject(energy, 75,700);
+        addObject(energyLabel, 74,700);
+        
 
         int decayFactor=enemies.size();
 
