@@ -262,16 +262,19 @@ public class Card extends Actor
                 image = new GreenfootImage("Barricade.png");
                 setStats(0,0,3);
                 target=false;
+                power=true;
                 break;
             case 46: 
                 image = new GreenfootImage("DemonForm.png");
                 setStats(0,0,3);
                 target=false;
+                power=true;
                 break;
             case 47: 
                 image = new GreenfootImage("Metallicize.png");
                 setStats(0,0,1);
                 target=false;
+                power=true;
                 break;
         }
         image.scale(150,194);

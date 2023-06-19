@@ -90,9 +90,14 @@ public class Entity extends Actor
                     deck.addIntoDrawPile(new Card(43));
                 }
 
+                int tempStrength=world.getPlayer().getStrength();
+                if (card.getDamage()==0){ // so cards that dont attack aren't effected
+                    tempStrength=0;
+                }
+
                 if (card.getTarget()){
                     for (int i=0; i<attackNum; i++){
-                        hit(card.getDamage()+world.getPlayer().getStrength()*strengthFactor,card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
+                        hit(card.getDamage()+tempStrength*strengthFactor,card.getVulnerable(),card.getWeaken(),world.getPlayer().getWeaken()); 
                         if (card.getCardID()==20&&this.dead){
                             world.getPlayer().increaseMaxHealth(3);
                         }
@@ -103,7 +108,7 @@ public class Entity extends Actor
                 else{
                     world.cardUsedOnWorld(); 
                 }
-                
+
                 if (card.getCardID()==9){
                     deck.exhaustHand(card);
                 }
@@ -165,6 +170,9 @@ public class Entity extends Actor
     }
 
     public void block (int block){
+        if (block==0){
+            return;
+        }
         this.block+=(block+dex); 
     }
 
@@ -238,7 +246,7 @@ public class Entity extends Actor
     public void incantation(int amount){
         incantation+=amount;
     }
-    
+
     public void metallicize(int amount){
         metallicize+=amount;
         block(amount);

@@ -82,7 +82,7 @@ public class Lagavulin extends Enemy
     @Override
     public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
         super.hit(damage,vulnerable,weaken,attackerWeakend);
-        if (damage<=8){
+        if (health==maxHealth){
             return;
         }
         if (asleep){

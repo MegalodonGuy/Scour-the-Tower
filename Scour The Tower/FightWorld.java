@@ -10,88 +10,63 @@ public class FightWorld extends World
 {
     private ArrayList <Object> initialDeck = new ArrayList<Object>(); 
     private ArrayList <Object> hand = new ArrayList<Object>(); 
-    private ArrayList <Object> enemies = new ArrayList<Object>();  
+    private ArrayList <Object> enemies = new ArrayList<Object>(); 
+    private ArrayList <Object> fullDeck = new ArrayList<Object>(); 
     private Deck deck;
     private Player player;
     private EndTurnButton etb;  
-
+    private int levelNum;
     GreenfootImage image; 
     /**
      * Constructor for objects of class MyWorld.
      * 
      */
-    public FightWorld()
+    public FightWorld(Player player, Deck deck, int levelNum,ArrayList fullDeck)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1); 
 
         image = new GreenfootImage("ActOne.png");
 
+        this.levelNum=levelNum+1;
+
         image.scale(1000,800);
         getBackground().drawImage(image,0,0);
         Deck.setSelected(null);
-        initialDeck.add(new Card(1)); 
-        initialDeck.add(new Card(1));  
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(2)); 
-        initialDeck.add(new Card(3));
-        initialDeck.add(new Card(4));
-        initialDeck.add(new Card(5));
-        initialDeck.add(new Card(6));
-        initialDeck.add(new Card(7));
-        initialDeck.add(new Card(8));
-        initialDeck.add(new Card(9));
-        initialDeck.add(new Card(10));
-        initialDeck.add(new Card(11));
-        initialDeck.add(new Card(12));
-        initialDeck.add(new Card(13));
-        initialDeck.add(new Card(14));
-        initialDeck.add(new Card(15));
-        initialDeck.add(new Card(16));
-        initialDeck.add(new Card(17));
-        initialDeck.add(new Card(18));
-        initialDeck.add(new Card(19));
-        initialDeck.add(new Card(20));
-        initialDeck.add(new Card(21));
-        initialDeck.add(new Card(22));
-        initialDeck.add(new Card(23));
-        initialDeck.add(new Card(24));
-        initialDeck.add(new Card(25));
-        initialDeck.add(new Card(26));
-        initialDeck.add(new Card(27));
-        initialDeck.add(new Card(28));
-        initialDeck.add(new Card(29));
-        initialDeck.add(new Card(30));
-        initialDeck.add(new Card(31));
-        initialDeck.add(new Card(32));
-        initialDeck.add(new Card(33));
-        initialDeck.add(new Card(34));
-        initialDeck.add(new Card(35));
-        initialDeck.add(new Card(37));
-        initialDeck.add(new Card(38));
-        initialDeck.add(new Card(40));
-        initialDeck.add(new Card(41));
-        initialDeck.add(new Card(42));
-        initialDeck.add(new Card(44));
-        initialDeck.add(new Card(45));
-        initialDeck.add(new Card(46));
-        initialDeck.add(new Card(47));
 
-        deck = new Deck(initialDeck);
-        player = new Player(80,80,deck,this);
+        this.deck=deck;
+        this.player=player;
 
-        //enemies.add(new JawWorm(42,42,deck,this,player));
-        //enemies.add(new Cultist(42,42,deck,this,player));
-        //enemies.add(new Hexaghost(250,250,deck,this,player));
-        enemies.add(new Lagavulin(110,110,deck,this,player));
+        player.setWorld(this);
+
+        int ran= ((int)(Math.random()*100))+1;
+        if (this.levelNum<3){
+            if (ran<=50){
+                enemies.add(new JawWorm(42,42,deck,this,player));
+            }
+            else if (ran>50){
+                enemies.add(new Cultist(42,42,deck,this,player));
+            }
+        }
+        else if (this.levelNum==3){
+            enemies.add(new Lagavulin(110,110,deck,this,player));
+        }
+        else if (this.levelNum>3 && this.levelNum<6){
+            if (ran<=50){
+                enemies.add(new JawWorm(42,42,deck,this,player));
+            }
+            else if (ran>50){
+                enemies.add(new Cultist(42,42,deck,this,player));
+            }
+        }
+        else if (levelNum==6){
+            enemies.add(new Hexaghost(250,250,deck,this,player));
+        }
 
         etb = new EndTurnButton(deck); 
-
-        addObject(deck,0,0);
+        addObject(this.deck,0,0);
         addObject(etb,900,700);
-        addObject(player, 200,400);
+        addObject(this.player, 200,400);
         for (int x =0; x<enemies.size(); x++){
             addObject((Entity)enemies.get(x), 800-250*x,370);
         }
@@ -115,6 +90,13 @@ public class FightWorld extends World
         if (Greenfoot.mouseClicked(this) && Deck.getSelectedCard()!=null){
             // if card used on enemy
             cardUsedOnWorld(); 
+        }
+
+        if (enemies.size()==0){
+            player.setSpawned(false);
+            deck.setEnergy(deck.getMaxEnergy());
+            deck.reset();
+            Greenfoot.setWorld(new FightWorld(player,deck,levelNum,fullDeck));
         }
     }
 
@@ -182,13 +164,16 @@ public class FightWorld extends World
         else if(card.getCardID()==47){
             player.metallicize(3);
         }
-        
 
+        int tempStrength=player.getStrength();
+        if (card.getDamage()==0){ // so cards that dont attack aren't effected
+            tempStrength=0;
+        }
         if (!card.getTarget() &&!card.getAOE()){
             for (int i=0; i<card.getAttackNum(); i++){
                 player.block(card.getBlock()); 
                 int ran = (int)(Math.random()*enemies.size());
-                ((Entity)enemies.get(ran)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
+                ((Entity)enemies.get(ran)).hit(card.getDamage()+tempStrength,card.getVulnerable(),card.getWeaken(),player.getWeaken());
             }
             deck.playedCard(card);
 
@@ -198,7 +183,7 @@ public class FightWorld extends World
                 player.block(card.getBlock()); 
                 for (int x=0; x< enemies.size(); x++){
                     int previousHealth=((Entity)enemies.get(x)).getHealth();
-                    ((Entity)enemies.get(x)).hit(card.getDamage()+player.getStrength(),card.getVulnerable(),card.getWeaken(),player.getWeaken());
+                    ((Entity)enemies.get(x)).hit(card.getDamage()+tempStrength,card.getVulnerable(),card.getWeaken(),player.getWeaken());
                     int newHealth=((Entity)enemies.get(x)).getHealth();
                     if(card.getCardID()==19){
                         player.heal(previousHealth-newHealth); // sorta bad way to do it but it works
@@ -209,6 +194,7 @@ public class FightWorld extends World
         }
 
     }
+
     public Player getPlayer(){
         return player; 
     }
