@@ -1,6 +1,6 @@
 #Greenfoot project file
 class.Card.image=Burn+.png
-class.Deck.image=Null.png
+class.Deck.image=4.png
 class.EndTurnButton.image=End.png
 class.Energy.image=energy.png
 class.FightWorld.image=ActOne.png

@@ -31,6 +31,9 @@ public class Deck extends Actor
     
     public void reset(){
         // reset deck variables after new level 
+        discardPile.clear();
+        exhaustPile.clear();
+        hand.clear();
         drawPile=Util.cloneContents(deck); 
         maxEnergy=3; 
         energy=maxEnergy;
