@@ -12,25 +12,46 @@ public class Enemy extends Entity
     Deck deck;
     protected int ran; // used for attack rolls
     protected String nextMove;
+    protected Label intentLabel;
+    private FightWorld world;
     public Enemy(int maxHealth, int health,Deck deck, FightWorld world,Player player){
         super(maxHealth, health, deck, world);
         this.player=player; 
         this.deck =deck;
+        this.world=world;
     }
     // default, overide in specific enemy, goes through moves in enemy clss
     protected void attackPattern(){
         System.out.println("hey");
     }
 
+    @Override 
+    public void act(){
+        if (!spawned){
+            intentLabel = new Label(""+getNextMove());
+            world.addObject(intentLabel,getX(),getY()-50);
+        }
+        if (Greenfoot.mouseClicked(intentLabel)){
+            clicked();
+        }
+        super.act();
+    }
+    
+    @Override 
+    public void die(){
+        world.removeObject(this.intentLabel);
+        super.die();
+    }
+
     @Override
     public void turnPassed(){
         super.turnPassed();
         ((Enemy)this).attackPattern(); //do attack pattern
-
+        intentLabel.setText(""+getNextMove());
     }
 
     public void hit(int damage,int vulnerable, int weaken, int attackerWeakend){
-        
+
         if (Deck.getSelectedCard()==null){
             return;
         }
@@ -41,10 +62,10 @@ public class Enemy extends Entity
         }
         super.hit(damage, vulnerable, weaken, attackerWeakend);
     }
-    
+
     public String getNextMove(){
         return nextMove;
         // returns string of this enemies next move
     }
-    
+
 }
