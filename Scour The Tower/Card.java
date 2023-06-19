@@ -35,7 +35,8 @@ public class Card extends Actor
         exhaust= false;
         power=false;
         ethereal=false;
-        switch (CardID){
+        // set card variables
+        switch (CardID){ 
             case 1: 
                 image = new GreenfootImage("Strike.png"); 
                 setStats(6,0,1); //attack damage, block amount and energy cost
@@ -287,6 +288,7 @@ public class Card extends Actor
      */
     public void act()
     {
+        // select card
         if (Greenfoot.mouseClicked(this)){
             if (!selected){
                 Deck.setSelected(this);
@@ -305,13 +307,15 @@ public class Card extends Actor
             selected=false;
         }
     }
-
+    
+    //sets stats all cards have
     private void setStats(int damage, int block,int energy){
         this.damage = damage; 
         this.block = block; 
         this.energy = energy; 
     }
-
+    
+    //upgrades cards, not fully implemented but functional
     public void upgrade(){
         if (upgraded){
             return; 
@@ -335,7 +339,9 @@ public class Card extends Actor
         }
         upgraded=true; 
     }
-
+    
+    // get card information
+    
     public int getCardID(){
         return CardID; 
     }

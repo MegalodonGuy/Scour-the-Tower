@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class StartButton here.
  * 
- * @author (your name) 
+ * @author (Ben H.) 
  * @version (a version number or a date)
  */
 public class StartButton extends Button
@@ -15,6 +15,7 @@ public class StartButton extends Button
     }
     
     public void act(){
+        // makes new fight world based on player and deck made in start screen, next level will be level 1
         fightWorld =new FightWorld(startScreen.getPlayer(),startScreen.getDeck(),0,startScreen.getFullDeck());
         if (Greenfoot.mouseClicked(this)){
              buttonAction();  
@@ -22,6 +23,7 @@ public class StartButton extends Button
     }
     @Override 
     protected void buttonAction(){  
+        //sets world as fight world made
         Greenfoot.setWorld(fightWorld);
     }
     

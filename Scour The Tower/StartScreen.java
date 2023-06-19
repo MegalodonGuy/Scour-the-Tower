@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Write a description of class StartScreen here.
  * 
- * @author (your name) 
+ * @author (Ben H) 
  * @version (a version number or a date)
  */
 public class StartScreen extends World
@@ -22,6 +22,7 @@ public class StartScreen extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(980, 550, 1); 
+        // make deck
         initialDeck.add(new Card(1)); 
         initialDeck.add(new Card(1));  
         initialDeck.add(new Card(2)); 
@@ -70,12 +71,14 @@ public class StartScreen extends World
         initialDeck.add(new Card(45));
         initialDeck.add(new Card(46));
         initialDeck.add(new Card(47));
+        // make the start button 
         deck = new Deck(initialDeck);
         startButton=new StartButton(this);
         player = new Player(80,80,deck,startButton.getFightWorld());
         addObject(startButton,490,400);
     }
     
+    // for start button
     public Player getPlayer(){
         return player;
     }

@@ -17,7 +17,7 @@ public class Enemy extends Entity
         this.player=player; 
         this.deck =deck;
     }
-    // default, overide in specific enemy 
+    // default, overide in specific enemy, goes through moves in enemy clss
     protected void attackPattern(){
         System.out.println("hey");
     }
@@ -25,7 +25,7 @@ public class Enemy extends Entity
     @Override
     public void turnPassed(){
         super.turnPassed();
-        ((Enemy)this).attackPattern(); 
+        ((Enemy)this).attackPattern(); //do attack pattern
 
     }
 
@@ -37,12 +37,14 @@ public class Enemy extends Entity
         Card card = (Card)(Deck.getSelectedCard());
         if (card.getCardID()==8){
             damage=player.getBlock();
+            // body slam does dmg = to block
         }
         super.hit(damage, vulnerable, weaken, attackerWeakend);
     }
     
     public String getNextMove(){
         return nextMove;
+        // returns string of this enemies next move
     }
     
 }

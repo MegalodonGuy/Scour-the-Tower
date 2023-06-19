@@ -27,6 +27,7 @@ public class JawWorm extends Enemy
         if (dead){
             return; 
         }
+        // has first move as chomp then randomizes attack after
         if (firstMove || ran==0){
             move1(); 
             firstMove=false; 
@@ -34,7 +35,7 @@ public class JawWorm extends Enemy
             nextMove();
             return; 
         }
- 
+         
         if (ran>=1 && ran<=25){
             move1(); 
         }

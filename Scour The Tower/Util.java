@@ -18,7 +18,10 @@ public class Util
     {
 
     }
-
+    
+    /**
+     * makes allows cards to be veiwed, lays out how they should look depending on amount in hand
+     */
     public static void updateCardVisuals(ArrayList<Object> hand, Deck deck, World world){
         hand = Util.cloneContents(deck.getHand());
 
@@ -46,7 +49,10 @@ public class Util
 
         world.showText("Energy: "+deck.getAvailableEnergy()+"/"+deck.getMaxEnergy(),75,700);
     }
-
+    
+    /**
+     * clones an array list, helpful for deck
+     */
     public static ArrayList<Object> cloneContents(ArrayList<Object> cloner){
         ArrayList<Object> tempList= new ArrayList<Object>(); 
         for (int i=0; i<cloner.size(); i++){
