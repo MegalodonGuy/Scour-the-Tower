@@ -21,6 +21,8 @@ public class Entity extends Actor
     private FightWorld world;
     protected Bar bar;
     protected Label label;
+    protected Block blockSymbol;
+    protected Label blockLabel;
     //powers
     protected boolean barricade=false;
     protected int demonForm=0;
@@ -37,6 +39,8 @@ public class Entity extends Actor
         this.world =world; 
         bar = new Bar(this);
         label = new Label(health + "/" + maxHealth);
+        blockLabel=new Label(""+this.block);
+        blockSymbol = new Block();
     }
 
     /**
@@ -48,6 +52,8 @@ public class Entity extends Actor
         if (!spawned){
             world.addObject(bar, getX(), getY()+125);
             world.addObject(label, getX(), getY()+125);
+            world.addObject(blockSymbol, getX()+60, getY()+125);
+            world.addObject(blockLabel, getX()+60, getY()+125);
             spawned=true;
         }
         if (Greenfoot.mouseClicked(this)){
@@ -152,7 +158,7 @@ public class Entity extends Actor
         }
         health-=dmg; 
         label.setText(health + "/" + maxHealth);
-
+        blockLabel.setText(""+this.block);
         this.vulnerable+=vulnerable; 
         this.weakened+=weaken;
         if (health<=0 && !dead){
@@ -204,6 +210,7 @@ public class Entity extends Actor
             return;
         }
         this.block+=(block+dex); 
+        blockLabel.setText(""+this.block);
     }
 
     public void vulnerable(int vulnerable){
@@ -234,6 +241,8 @@ public class Entity extends Actor
         getWorld().removeObject(this);
         world.removeObject(this.bar);
         world.removeObject(this.label);
+        world.removeObject(this.blockSymbol);
+        world.removeObject(this.blockLabel);
         dead=true; 
     }
 
@@ -266,6 +275,8 @@ public class Entity extends Actor
         strength+=2*demonForm;
         strength+=incantation;
         block+=metallicize;
+        
+        blockLabel.setText(""+this.block);
     }
 
     //powers
