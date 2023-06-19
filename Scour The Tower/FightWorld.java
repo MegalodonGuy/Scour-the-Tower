@@ -53,9 +53,9 @@ public class FightWorld extends World
                 enemies.add(new Lagavulin(110,110,deck,this,player));
             }
             else if (ran>50){
-                enemies.add(new Sentry(250,250,deck,this,player,1));
-                enemies.add(new Sentry(250,250,deck,this,player,2));
-                enemies.add(new Sentry(250,250,deck,this,player,1));
+                enemies.add(new Sentry(40,40,deck,this,player,1));
+                enemies.add(new Sentry(40,40,deck,this,player,2));
+                enemies.add(new Sentry(40,40,deck,this,player,1));
             }
         }
         else if (this.levelNum>3 && this.levelNum<6){
