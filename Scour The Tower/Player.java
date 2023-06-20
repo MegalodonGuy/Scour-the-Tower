@@ -83,6 +83,7 @@ public class Player extends Entity
         vulnerable=0;
         weakened=0;
         block=0;
+        blockLabel.setText(""+this.block);
         barricade=false;
     }
     
