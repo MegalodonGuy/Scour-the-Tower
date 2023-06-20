@@ -106,7 +106,7 @@ public class Enemy extends Entity
             intentSymbol = new IntentSymbols(new GreenfootImage("BlockAttackIntent.png"));    
             break;
             case "Bellow":
-            intentSymbol = new IntentSymbols(new GreenfootImage("BuffIntent.png"));    
+            intentSymbol = new IntentSymbols(new GreenfootImage("BlockBuff.png"));    
             break;
             case "Beam":
             intentSymbol = new IntentSymbols(new GreenfootImage("SmallAttack.png"));    
@@ -160,7 +160,7 @@ public class Enemy extends Entity
             intentSymbol.setImage("BlockAttackIntent.png");  
             break;
             case "Bellow":
-            intentSymbol.setImage("BuffIntent.png");    
+            intentSymbol.setImage("BlockBuff.png");    
             break;
             case "Beam":
             intentSymbol.setImage("SmallAttack.png");    
