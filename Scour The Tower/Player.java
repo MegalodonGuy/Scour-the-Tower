@@ -40,14 +40,23 @@ public class Player extends Entity
     
     @Override 
     public void die(){
-        world.removeObject(this);
+        //Code for when the PLAYER dies
+        //Update and scale image to dead iron clad
+        image = new GreenfootImage("IronCladDead.png");
+        image.scale(350,134);
+        setImage(image);
+        setLocation(275,500);
+        
+        //Remove battle associated things like hp bar, etc..
         world.removeObject(this.bar);
         world.removeObject(this.label);
         world.removeObject(this.blockSymbol);
         world.removeObject(this.blockLabel);
+        
         dead=true; 
-        System.out.println("Darn, you died");
-        Greenfoot.setWorld(new StartScreen());
+        
+        //Creat death world, passing through the player and current enemy
+        Greenfoot.setWorld(new DeathWorld(this, world.getEnemy()));
     }
     
     public int getStrength(){
@@ -71,6 +80,9 @@ public class Player extends Entity
         dex=0;
         demonForm=0;
         metallicize=0;
+        vulnerable=0;
+        weakened=0;
+        block=0;
         barricade=false;
     }
     
