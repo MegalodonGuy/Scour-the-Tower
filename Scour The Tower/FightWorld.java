@@ -126,8 +126,11 @@ public class FightWorld extends World
         // when you win the fight
         if (enemies.size()==0){
             if (levelNum>=8){
-                System.out.println("You Win!");
-                Greenfoot.setWorld(new StartScreen());
+                removeObject(player.bar);
+                removeObject(player.label);
+                removeObject(player.blockSymbol);
+                removeObject(player.blockLabel);
+                Greenfoot.setWorld(new WinWorld(player));
             }
             else if (levelNum<999){
                 player.afterFight();

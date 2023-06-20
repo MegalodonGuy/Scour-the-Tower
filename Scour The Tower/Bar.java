@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class HealthBar here.
  * 
- * @author (your name) 
+ * @author (Franklin G.) 
  * @version (a version number or a date)
  */
 public class Bar extends Actor
