@@ -87,7 +87,7 @@ public class FightWorld extends World
         addObject(etb,900,700);
         addObject(this.player, 200,400);
     
-        // add the enemies of the level, squeezes them together when there is a bunch
+        // add energy and energy label
         addObject(energy, 75,700);
         addObject(energyLabel, 74,700);
         
@@ -245,5 +245,8 @@ public class FightWorld extends World
 
     public Player getPlayer(){
         return player; 
+    }
+    public ArrayList <Object> getEnemy(){
+        return enemies;
     }
 }
