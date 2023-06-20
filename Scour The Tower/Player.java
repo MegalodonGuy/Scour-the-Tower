@@ -40,14 +40,19 @@ public class Player extends Entity
     
     @Override 
     public void die(){
-        world.removeObject(this);
-        world.removeObject(this.bar);
-        world.removeObject(this.label);
-        world.removeObject(this.blockSymbol);
-        world.removeObject(this.blockLabel);
-        dead=true; 
-        System.out.println("Darn, you died");
-        Greenfoot.setWorld(new StartScreen());
+        Greenfoot.setWorld(new DeathWorld());
+    
+        //image = new GreenfootImage("IronCladDead.png");
+        //image.scale(350,134);
+        //setImage(image);
+        //setLocation(275,500);
+        // world.removeObject(this.bar);
+        //world.removeObject(this.label);
+        //world.removeObject(this.blockSymbol);
+        //world.removeObject(this.blockLabel);
+        //dead=true; 
+        
+        
     }
     
     public int getStrength(){
